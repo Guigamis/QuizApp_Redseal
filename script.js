@@ -2470,12 +2470,206 @@ const questions = [
     options: ['Broken shading coil', 'Insufficient Tip pressure', 'Dirt or rust on pole faces', 'Sustained overload'],
     answer: 2,
   },
+  {
+    question: 'Two identical lamps are connected in series across a 120 V supply. What voltage appears across each lamp?',
+    options: ['120 V — every load in a circuit sees the full supply', '240 V — the two lamp voltages add together in series', '60 V — equal resistances split the supply', '0 V — current flows but no voltage is dropped'],
+    answer: 2,
+  },
+  {
+    question: 'Three elements are connected in series across a 24 V control supply. A meter reads 6 V across the first and 10 V across the second. What must appear across the third?',
+    options: ['8 V, because the three drops must add up to the 24 V supply', '24 V, because every part of a series string sees the full supply', '14 V, from subtracting only the larger measured drop from 24 V', '16 V, because the third drop equals the two measured ones added'],
+    answer: 0,
+  },
+  {
+    question: 'A capacitor bank is switched in across a motor load and the measured line current falls noticeably, while the machinery keeps doing exactly the same work. What has happened?',
+    options: ['The capacitors now supply the reactive current the motor needs', 'The capacitors reduce the real power the motor draws from the line', 'The capacitors lower the supply voltage, so less current is drawn', 'The capacitors store energy and release it back into the machinery'],
+    answer: 0,
+  },
+  {
+    question: 'A junction box of standard nominal dimensions, with no device mounted in it, is to be filled with conductors that are all the same size. Under the Canadian Electrical Code, how is the number of insulated conductors it may contain determined?',
+    options: ['Read the count from the code\'s box table, then take the deductions', 'Count only the conductors that are spliced or terminated in the box', 'Count ten conductors of one size, the limit for a standard box', 'Total the conductors\' cubic centimetres and compare with the box volume'],
+    answer: 0,
+  },
+  {
+    question: 'In a reversing motor starter, why must the forward and reverse contactors be interlocked?',
+    options: ['To transfer overload protection between the two contactors', 'To stop both contactors from closing at the same time', 'To let the motor coast to a stop before it reverses', 'To limit inrush current when the motor changes direction'],
+    answer: 1,
+  },
+  {
+    question: 'What does LOTO stand for and when must it be applied?',
+    options: ['Lock Out, Tag Out — only for high voltage above 600V', 'Line Output Test Operation — during electrical testing', 'Load Only, Turn Off — when changing light bulbs', 'Lockout/Tagout — before maintenance or service on equipment'],
+    answer: 3,
+  },
+  {
+    question: 'When running EMT conduit through a fire-rated wall assembly, what is required at the penetration?',
+    options: ['Nothing — EMT is metal and inherently fire resistant', 'A junction box on each side', 'An approved firestop system at the penetration', 'A locknut on each side of the wall'],
+    answer: 2,
+  },
+  {
+    question: 'A buck-boost transformer is connected as an autotransformer to lift a 208 V supply to about 230 V for a motor. What does that connection give up compared with a two-winding transformer of the same rating?',
+    options: ['The ability to change voltage, which needs two separate windings', 'Overcurrent protection, which a two-winding transformer provides', 'Isolation — the two circuits share a winding and a conductor', 'Efficiency, because an autotransformer loses more in its core'],
+    answer: 2,
+  },
+  {
+    question: 'What is the minimum approach distance for an unqualified worker near an energized overhead power line at 25kV in Canada?',
+    options: ['10 metres', '5 metres', '1 metre', '3 metres'],
+    answer: 3,
+  },
+  {
+    question: 'A 120/240 V multi-wire branch circuit shares one neutral between two ungrounded conductors. The neutral is looped under the terminal screws of each receptacle rather than pigtailed. If a receptacle is removed for replacement, what happens to the two circuits?',
+    options: ['The two 120 V loads end up in series across 240 V', 'Both circuits lose power and the breaker trips immediately', 'The shared neutral current doubles and overheats the conductor', 'The bonding conductor carries the load current'],
+    answer: 0,
+  },
+  {
+    question: 'A choke coil is moved from a 60 Hz supply to a 400 Hz supply of the same voltage. What happens to its inductive reactance and to the current through it?',
+    options: ['Reactance is unchanged, so the current stays the same', 'Reactance falls with frequency, so the current rises', 'Reactance rises with frequency, so the current falls', 'Reactance rises with frequency, so the current rises too'],
+    answer: 2,
+  },
+  {
+    question: 'A panelboard in a commercial building has a neutral bus and a separate ground bus. What is the difference in how they are bonded in a service entrance vs. a sub-panel?',
+    options: ['At the service entrance, neutral and ground are separate. Sub-panels bond them together', 'Both service and sub-panels must have bonded neutral and ground buses', 'Bonded at the service entrance; kept separate at sub-panels', 'Kept separate in both; the bond is made out at the grounding electrode instead'],
+    answer: 2,
+  },
+  {
+    question: 'A motor driving a high-inertia load takes about 15 seconds to reach full speed, and the starter trips on overload during almost every start even though running current is normal once the motor is up to speed. What is the correct remedy?',
+    options: ['Install larger branch-circuit fuses so the starting current is carried', 'Fit a Class 20 overload relay set to the same full-load current', 'Raise the overload relay setting to 150% of the motor full-load current', 'Wire a timing relay that bypasses the overload contact while accelerating'],
+    answer: 1,
+  },
+  {
+    question: 'A magnetic starter is fed by a control transformer whose secondary has one leg bonded to ground. The stop button, the start button and the overload contact are all wired in the ungrounded leg, and the coil connects directly to the grounded leg. Why is the circuit built this way?',
+    options: ['A single ground fault in the control wiring cannot energize the coil and start the motor', 'It cuts voltage drop on long control runs so the coil still pulls in at a distant pushbutton station', 'It bonds the coil to ground so that anyone working at the remote pushbutton station is protected from shock', 'The grounded leg carries no current, so the coil terminals sit at zero volts while the motor runs'],
+    answer: 0,
+  },
+  {
+    question: 'On a British Columbia job, a fixed-in-place electric vehicle charger is field-adjusted, following the manufacturer\'s instructions, to a charging current below its nameplate maximum. When may that lower setting, rather than the nameplate rating, be used to size the branch circuit?',
+    options: ['When the user cannot change it and the setting is labelled', 'When the adjustment is made before the charger is energized', 'When the charger is the only load on its branch circuit', 'When a qualified person signs off on the adjustment'],
+    answer: 0,
+  },
+  {
+    question: 'Under the CEC, what is the purpose of a ground fault protection device fitted to a large solidly grounded service?',
+    options: ['To protect against lightning strikes on the service entrance', 'To detect ground faults before arcing destroys the switchgear', 'To provide GFCI (shock) protection for personnel', 'To balance the load between phases'],
+    answer: 1,
+  },
+  {
+    question: 'The reactance of a capacitor (X_C) in an AC circuit:',
+    options: ['Increases as frequency increases', 'Decreases as frequency increases', 'Is not affected by frequency', 'Is equal to the capacitance value in farads'],
+    answer: 1,
+  },
+  {
+    question: 'Under the Ontario Electrical Safety Code, receptacles of CSA configuration 5-15R and 5-20R installed in a dwelling unit must be:',
+    options: ['On dedicated circuits (one receptacle per breaker)', 'Labelled with the circuit breaker number', 'Tamper-resistant with shuttered slots', 'GFCI protected in all rooms'],
+    answer: 2,
+  },
+  {
+    question: 'A technician is working alone in an electrical room. Under Canadian occupational health and safety regulation, lone-worker requirements typically include:',
+    options: ['No special requirements — electrical work can always be done alone', 'Working alone requires only notifying a supervisor before starting', 'Lone work is prohibited outright for any electrical task', 'A check-in system, buddy system, or remote monitoring'],
+    answer: 3,
+  },
+  {
+    question: 'Transformer nameplates give a rating in kVA rather than kW. Why is the rating expressed that way?',
+    options: ['Because its limits are heat and flux, which ignore the load\'s power factor', 'Because the rating already includes the transformer\'s own internal losses', 'Because kVA is simply the older unit, and kW would state the same limit', 'Because transformers deliver only reactive power, which is measured in kVA'],
+    answer: 0,
+  },
+  {
+    question: 'Arc fault protection is being provided for a branch circuit in a house. Under the CE Code, which device satisfies that requirement?',
+    options: ['An arc fault receptacle at the last outlet on the circuit', 'A branch/feeder-type arc fault circuit interrupter', 'A Class A ground fault circuit interrupter breaker', 'A combination-type arc fault circuit interrupter'],
+    answer: 1,
+  },
+  {
+    question: 'A 200 A consumer\'s service supplies a continuous load. The overcurrent device is not marked for continuous operation at 100% of its rating, and the conductors are sized from the Code\'s cable and raceway ampacity tables. Under the Canadian Electrical Code, the largest continuous load this circuit may carry is:',
+    options: ['200 A, because the whole rating of the circuit may be loaded continuously', '160 A, because a continuous load is capped at 80% of the circuit rating', '250 A, because a continuous load raises the protected rating by 125%', '140 A, because a continuous load is capped at 70% of the circuit rating'],
+    answer: 0,
+  },
+  {
+    question: 'Under the Canadian Electrical Code, which of the following is evidence that a piece of electrical equipment is approved for installation in Canada?',
+    options: ['A mark from a certification body accredited by the Standards Council of Canada', 'A CE mark, which shows the product meets the European safety standards in force', 'A CSA mark specifically, since marks from other agencies are not accepted here', 'A test report from the manufacturer, kept on file for the inspector to review'],
+    answer: 0,
+  },
+  {
+    question: 'A homeowners portable generator is being connected to a house as back-up power through a two-pole transfer switch that switches the two ungrounded conductors and carries the neutral solidly through. The generator nameplate states that it has a floating neutral, not bonded to the frame. Following provincial code-authority guidance on CE Code Section 10, how should that neutral be handled?',
+    options: ['Grounded at the generator to an electrode driven there', 'Opened by an extra pole added to the transfer switch', 'Left unbonded, with the bond kept back at the service', 'Bonded to the generator frame to make the system safe'],
+    answer: 2,
+  },
+  {
+    question: 'A VFD (Variable Frequency Drive) is installed on a pump motor and the operator reports the motor makes a high-pitched whine but operates correctly otherwise. What is the most likely explanation?',
+    options: ['The VFDs PWM carrier frequency is in the audible range — a normal characteristic', 'The VFD is malfunctioning — high-pitched noise indicates an output fault', 'The motor bearings are failing — a high-pitched whine is early bearing failure', 'The pump impeller is cavitating due to low suction pressure'],
+    answer: 0,
+  },
+  {
+    question: 'What is the function of a motor nameplates "Service Factor" (SF)?',
+    options: ['The efficiency rating of the motor at full load', 'A multiplier for allowable operation above rated horsepower', 'The overload relay trip setting recommended by the manufacturer', 'The motor\'s insulation class temperature rating'],
+    answer: 1,
+  },
+  {
+    question: 'What is a "motor control centre" (MCC) and what are its main components?',
+    options: ['An isolated room housing the main service entrance equipment', 'A transformer vault that steps voltage down for motor applications', 'A PLC cabinet that replaces conventional motor starters in modern facilities', 'An assembly of motor starters and disconnects in a common structure'],
+    answer: 3,
+  },
+  {
+    question: 'A three-phase motor is running hot. The three line-to-line voltages measured at its terminals agree with one another within 0.2%, but the three line currents read 24 A, 18 A and 18 A. What is the most likely cause?',
+    options: ['Shorted turns in one phase, lowering its impedance', 'Single-phasing — one of the supply lines has opened', 'Supply voltage unbalance, amplified by the motor', 'An overload relay reading one line out of calibration'],
+    answer: 0,
+  },
+  {
+    question: 'According to CEC Table 53, what is the minimum cover for a direct-buried armoured cable such as TECK90, rated 750 V or less, in an area not subject to vehicular traffic?',
+    options: ['150 mm, because the armour is the protection that matters', '450 mm, reducible by 150 mm where protection is added', 'No minimum — armour lets the cable be laid at any depth', '900 mm, the same for every direct-buried cable and depth'],
+    answer: 1,
+  },
+  {
+    question: 'A technician is installing Type AC (armoured cable) and needs to connect it to a metal box. What is required at the connection point?',
+    options: ['The armour must be attached to the box for a continuous ground path', 'An AC-approved connector plus an anti-short (red) bushing over the cut armour', 'A grounding lug must be attached directly to the armour before entering the box', 'The armoured cable can be connected directly to the box without any fittings'],
+    answer: 1,
+  },
+  {
+    question: 'NMD90 non-metallic-sheathed cable is run exposed in the unfinished basement of a dwelling. Under the Canadian Electrical Code, when must that cable be given mechanical protection?',
+    options: ['Only where it runs within 32 mm of the edge of a stud, joist or similar member', 'Only where it passes through a fire separation between the basement and the floor above', 'Where it runs less than 1.5 m above the floor, or anywhere else exposed to damage', 'Nowhere — the sheath of NMD90 is itself the required mechanical protection'],
+    answer: 2,
+  },
+  {
+    question: 'A ground fault occurs on a 120 V branch circuit protected by a 15 A breaker. The fault current is only 3 A — far too low to trip the breaker. What device would protect a person against this fault?',
+    options: ['A larger 20 A breaker, since a higher rating responds to smaller faults', 'A fuse of the same rating, because a fuse is faster on a small fault', 'A Class A ground fault device, which trips on 4 to 6 mA in milliseconds', 'An arc fault device, which detects any fault below the breaker rating'],
+    answer: 2,
+  },
+  {
+    question: 'What is the purpose of a neutral conductor in a single-phase 120/240 V three-wire system?',
+    options: ['The neutral is only required for equipment with three-prong plugs — two-prong equipment does not need the neutral', 'The neutral only carries current during a ground fault — under normal operation it carries no current', 'The neutral carries all fault current to protect the hot conductors from overload', 'It provides the 120 V return path and balances unequal loads between the hot legs'],
+    answer: 3,
+  },
+  {
+    question: 'What is the difference between a fuse and a circuit breaker in terms of operation and resetability?',
+    options: ['Fuses are one-time use and must be replaced. Circuit breakers trip and can be reset', 'Fuses are reusable after an overload — the element resets when cooled. Circuit breakers are one-time use', 'Both are one-time-use devices — neither can be reset and both must be replaced after operation', 'Fuses protect against short circuits only; circuit breakers protect against overloads only'],
+    answer: 0,
+  },
+  {
+    question: 'An apprentice trained in the United States quotes a National Electrical Code article to justify an installation on a Canadian job. What actually governs the work?',
+    options: ['The manufacturers instructions, which override any code wording', 'The National Electrical Code, which is recognized across Canada', 'Whichever of the two codes is more demanding on that point', 'The provincial electrical code, being the CE Code as adopted there'],
+    answer: 3,
+  },
+  {
+    question: 'A direct-buried feeder has been laid in the trench at the required cover. Before the trench is backfilled to grade, what does the CE Code require so the run can be found again?',
+    options: ['A continuous concrete cap poured directly over the length of run', 'Nothing further, provided the cover meets the depth in Table 53', 'Marking tape roughly halfway between the installation and grade', 'Marking tape laid at a fixed depth of 300 mm below finished grade'],
+    answer: 2,
+  },
+  {
+    question: 'Four suites in different buildings each have a bed, a sitting area and their own washroom. Under the Canadian Electrical Code definition adopted in Ontario, which one of them is also a dwelling unit?',
+    options: ['The dorm room with a hotplate and a microwave oven', 'The hotel room with a bar fridge and a coffee maker', 'The bunkhouse room served by one common kitchen', 'The motel suite with a range and a dining table'],
+    answer: 3,
+  },
+  {
+    question: 'A single-phase 240 V transformer arc welder is marked with a rated primary current of 200 A at a 60% duty cycle. How does the CEC require the supply conductors for that welder to be sized?',
+    options: ['At the maximum welding output current marked on the nameplate', 'At 125% of the rated primary current, as for a continuous load', 'At the rated primary current reduced by a duty-cycle factor', 'At the full rated primary current, with no duty-cycle allowance'],
+    answer: 2,
+  },
+
   ]
 
 
 
   
 const setupScreen = document.getElementById('cec-setup-screen');
+const notesScreen = document.getElementById('notes-screen');
+const vocabularyScreen = document.getElementById('vocabulary-screen');
+const acronymsScreen = document.getElementById('acronyms-screen');
 const quizScreen = document.getElementById('quiz-screen');
 const sectionOptionsEl = document.getElementById('section-options');
 const countButtons = document.querySelectorAll('[data-question-count]');
@@ -2486,10 +2680,109 @@ const nextBtn = document.getElementById('next-btn');
 const previousBtn = document.getElementById('previous-btn');
 const resetBtn = document.getElementById('reset-btn');
 const notesToggleBtn = document.getElementById('notes-toggle-btn');
+const vocabularyBtn = document.getElementById('vocabulary-btn');
+const acronymsBtn = document.getElementById('acronyms-btn');
+const backToSetupBtn = document.getElementById('back-to-setup-btn');
+const backToSetupFromVocabularyBtn = document.getElementById('back-to-setup-from-vocabulary-btn');
+const backToSetupFromAcronymsBtn = document.getElementById('back-to-setup-from-acronyms-btn');
 const notesPanel = document.getElementById('notes-panel');
 const noteInput = document.getElementById('note-input');
 const saveNoteBtn = document.getElementById('save-note-btn');
 const notesList = document.getElementById('notes-list');
+const vocabularyList = document.getElementById('vocabulary-list');
+const acronymsList = document.getElementById('acronyms-list');
+
+const vocabularyTerms = [
+  { term: 'Sizing', meaning: 'Dimensionamento', note: 'Pergunta sobre tamanho/ampacidade' },
+  { term: 'Identification', meaning: 'Identificação', note: 'Como o condutor/equipamento é identificado' },
+  { term: 'Marking', meaning: 'Marcação', note: 'Identificação feita por marcação' },
+  { term: 'Labelling', meaning: 'Rotulagem/etiquetagem', note: 'Identificação por etiqueta/rótulo' },
+  { term: 'Continuous outer finish', meaning: 'Acabamento externo contínuo', note: 'Não confundir com uma simples marcação' },
+  { term: 'Permanent', meaning: 'Permanente', note: 'Não pode ser uma identificação temporária' },
+  { term: 'Suitably labelled or marked', meaning: 'Adequadamente rotulado ou marcado', note: 'Expressão importante do CEC' },
+  { term: 'Larger than No. 2 AWG', meaning: 'Maior que #2 AWG', note: '#1, 1/0, 2/0... — cuidado com AWG' },
+  { term: 'No. 2 AWG or smaller', meaning: '#2 AWG ou menor', note: '#2, #3, #4, #6...' },
+  { term: 'Grounding conductor', meaning: 'Condutor de aterramento', note: 'Não confundir com bonding conductor' },
+  { term: 'Bonding conductor', meaning: 'Condutor de bonding/equipotencialização', note: 'Continuidade elétrica entre partes' },
+  { term: 'Bare', meaning: 'Nu, sem isolamento', note: 'Ex.: bare live parts' },
+  { term: 'Exposed', meaning: 'Exposto', note: 'Não necessariamente significa bare' },
+  { term: 'Live parts', meaning: 'Partes energizadas', note: 'Atenção ao contexto da regra' },
+  { term: 'Working space', meaning: 'Espaço de trabalho', note: 'Clearance para operação/manutenção' },
+  { term: 'Headroom', meaning: 'Altura livre', note: 'Vertical, não confundir com working space' },
+  { term: 'Secure footing', meaning: 'Apoio/piso seguro para os pés', note: 'Aparece junto de working space' },
+  { term: 'Minimum', meaning: 'Mínimo', note: 'Não pode ser menor' },
+  { term: 'Maximum', meaning: 'Máximo', note: 'Não pode ser maior' },
+  { term: 'At least', meaning: 'Pelo menos', note: '≥' },
+  { term: 'Not less than', meaning: 'Não inferior a / no mínimo', note: '≥' },
+  { term: 'Not more than', meaning: 'Não superior a / no máximo', note: '≤' },
+  { term: 'More than', meaning: 'Mais que', note: '> — não inclui o valor' },
+  { term: 'Less than', meaning: 'Menos que', note: '< — não inclui o valor' },
+  { term: 'Or less', meaning: 'Ou menor', note: 'Inclui o valor indicado' },
+  { term: 'Or more', meaning: 'Ou maior', note: 'Inclui o valor indicado' },
+  { term: 'Except', meaning: 'Exceto', note: 'Procure imediatamente a exceção' },
+  { term: 'Unless', meaning: 'A menos que', note: 'Condição que altera a regra' },
+  { term: 'Permitted', meaning: 'Permitido', note: 'Não significa obrigatório' },
+  { term: 'Required', meaning: 'Exigido / obrigatório', note: 'Aqui sim é uma exigência' },
+  { term: 'Shall', meaning: 'Deve', note: 'Linguagem normativa' },
+  { term: 'May', meaning: 'Pode', note: 'Permissão, dependendo do contexto' },
+  { term: 'Suitable / suitable for', meaning: 'Adequado / apropriado', note: 'Muito usado para equipamentos/materiais' },
+  { term: 'Accessible', meaning: 'Acessível', note: 'Pode ter definição específica dependendo da regra' },
+  { term: 'Adjacent', meaning: 'Adjacente / imediatamente próximo', note: 'Importante em disconnects' },
+  { term: 'Ampacity', meaning: 'Ampacidade', note: 'Capacidade de conduzir corrente sem superaquecimento' },
+  { term: 'Branch circuit', meaning: 'Circuito derivado', note: 'Ramo do circuito principal que alimenta pontos de carga' },
+  { term: 'Conductor', meaning: 'Condutor', note: 'Material que conduz eletricidade; pode ser cobre ou alumínio' },
+  { term: 'Continuity', meaning: 'Continuidade', note: 'Muito importante em grounding/bonding' },
+  { term: 'Disconnecting means', meaning: 'Meio de desconexão', note: 'Dispositivo para desligar a energia em segurança' },
+  { term: 'Exposed to weather', meaning: 'Exposto às intempéries', note: 'Contexto outdoor' },
+  { term: 'Fire alarm system', meaning: 'Sistema de alarme de incêndio', note: 'Muito presente em questões de segurança e supervisão' },
+  { term: 'Fuse', meaning: 'Fusível', note: 'Dispositivo de proteção contra sobrecorrente' },
+  { term: 'Grounding', meaning: 'Aterramento', note: 'Proteção contra tensão e referência de potencial' },
+  { term: 'Insulation', meaning: 'Isolamento', note: 'Material que evita contato elétrico e fuga de corrente' },
+  { term: 'Mechanical protection', meaning: 'Proteção mecânica', note: 'Proteção contra dano físico' },
+  { term: 'Motor control circuit', meaning: 'Circuito de comando do motor', note: 'Circuito de controle, não de potência' },
+  { term: 'Overcurrent device', meaning: 'Dispositivo de sobrecorrente', note: 'Fusível ou disjuntor para proteção do circuito' },
+  { term: 'Panelboard', meaning: 'Quadro de distribuição', note: 'Painel que recebe e distribui circuitos' },
+  { term: 'Permanent', meaning: 'Permanente', note: 'Não pode ser uma identificação temporária' },
+  { term: 'Receptacle', meaning: 'Tomada / receptáculo', note: 'Ponto de alimentação para utilização' },
+  { term: 'Readily accessible', meaning: 'Prontamente acessível', note: 'Não confundir simplesmente com accessible' },
+  { term: 'Short circuit', meaning: 'Curto-circuito', note: 'Falha de baixa impedância com grande corrente' },
+  { term: 'Sheath', meaning: 'Bainha/capa metálica', note: 'Ex.: aluminum sheath' },
+  { term: 'Strip / stripping', meaning: 'Remover/decapar a capa', note: 'Ex.: stripping the aluminum sheath' },
+  { term: 'Termination', meaning: 'Terminação', note: 'Onde o cabo/condutor termina' },
+  { term: 'Thermal overload', meaning: 'Sobreaquecimento por sobrecarga', note: 'Comum em motores e dispositivos de proteção' },
+  { term: 'Transformer', meaning: 'Transformador', note: 'Dispositivo que altera tensão e corrente' },
+  { term: 'Voltage drop', meaning: 'Queda de tensão', note: 'Perda de tensão ao longo do circuito' },
+  { term: 'AFCI', meaning: 'Interrupção por falha de arco', note: 'Proteção contra arco em circuitos de ramal' },
+  { term: 'Bonding', meaning: 'Equipotencialização / ligação de continuidade', note: 'Tensões e correntes em partes metálicas' },
+  { term: 'Current transformer', meaning: 'Transformador de corrente', note: 'Usado para medir corrente sem interromper o circuito' },
+  { term: 'Fault current', meaning: 'Corrente de falha', note: 'Corrente muito alta em condição de defeito' },
+  { term: 'GFCI', meaning: 'Disjuntor de fuga à terra / GFCI', note: 'Proteção contra choque por fuga para terra' },
+  { term: 'Ground fault', meaning: 'Falha à terra', note: 'Rota de corrente para terra em ponto inadequado' },
+  { term: 'Grounding electrode', meaning: 'Eletrodo de aterramento', note: 'Ponto de conexão do sistema de aterramento' },
+  { term: 'Impedance', meaning: 'Impedância', note: 'Resistência à corrente alternada, inclui reatância' },
+  { term: 'Insulation resistance', meaning: 'Resistência de isolamento', note: 'Mede a integridade do isolamento do cabo' },
+  { term: 'Load', meaning: 'Carga', note: 'Equipamento ou circuito que consome potência' },
+  { term: 'Lockable', meaning: 'Permite trava/fechadura', note: 'Importante para meios de desconexão' },
+  { term: 'Neutral conductor', meaning: 'Condutor neutro', note: 'Retorna corrente em sistemas monofásicos e trifásicos' },
+  { term: 'Service equipment', meaning: 'Equipamento de serviço', note: 'Parte principal de entrada de energia do edifício' },
+  { term: 'Short-circuit current', meaning: 'Corrente de curto-circuito', note: 'Corrente máxima em falha de baixa impedância' },
+  { term: 'Wye-delta', meaning: 'Estrela-triângulo', note: 'Conexão de motores e transformadores em partida' },
+];
+
+const acronymTerms = [
+  { acronym: 'AC', meaning: 'Alternating Current', note: 'Corrente alternada' },
+  { acronym: 'AFCI', meaning: 'Arc-Fault Circuit Interrupter', note: 'Proteção contra falha de arco' },
+  { acronym: 'AWG', meaning: 'American Wire Gauge', note: 'Sistema de bitola de condutores' },
+  { acronym: 'CEC', meaning: 'Canadian Electrical Code', note: 'Código Elétrico Canadense' },
+  { acronym: 'CSA', meaning: 'Canadian Standards Association', note: 'Organização de normas e certificação' },
+  { acronym: 'DC', meaning: 'Direct Current', note: 'Corrente contínua' },
+  { acronym: 'GFCI', meaning: 'Ground-Fault Circuit Interrupter', note: 'Proteção contra fuga à terra' },
+  { acronym: 'MCC', meaning: 'Motor Control Centre', note: 'Centro de controle de motores' },
+  { acronym: 'NMD', meaning: 'Non-Metallic-sheathed cable', note: 'Cabo com revestimento não metálico' },
+  { acronym: 'PVC', meaning: 'Polyvinyl Chloride', note: 'Material usado em eletrodutos' },
+  { acronym: 'TECK90', meaning: 'Thermoset Electrical Cable 90', note: 'Cabo armado para instalações elétricas' },
+  { acronym: 'VFD', meaning: 'Variable Frequency Drive', note: 'Inversor de frequência' },
+];
 
 let quizQuestions = [];
 let currentQuestion = 0;
@@ -2498,7 +2791,135 @@ let answered = false;
 let quizFinished = false;
 let selectedSection = '';
 let answerSelections = [];
-let notes = JSON.parse(localStorage.getItem('redSealNotes') || 'null') || ['Vou passar no Red Seal 2026'];
+
+const studyNotesFromDocument = [
+  { section: 'THEORY', text: ['Vf = VL / √3', 'Full-wave rectifier:', 'VDC ≈ VAC × 0.9', 'Impedance triangle:', 'Z = √(R² + X²)', 'Three transformers in delta:', 'Remove one transformer', 'Remaining capacity = 57.7%', 'Fault current at transformer secondary:', 'Isc = FLC / Zpu', '4–20 mA:', 'Span = 16 mA', '50% = 12 mA', 'Lamp life increases with lower voltage.'].join('\n') },
+  { section: 'MOTORS', text: ['Motor fuse (time-delay) = 225%', 'Hermetic compressor fuse = 300%', 'Fire pump conductors = 125%', 'Centrifugal switch:', 'Closed when motor stopped', 'Opens at approximately 75–80% speed', 'Opens too early → motor may not start', 'Stuck closed → start winding remains energized and may burn', 'Shunt motor:', 'Used when speed is more important than torque', 'Missing phase on 3Ø motor:', 'Check overcurrent devices first', 'Motor exposed to moisture:', 'Isolate motor', 'Test each phase', 'Contactor humming:', 'Possible low voltage', 'Replacing contactor coil:', 'Verify voltage', 'Verify physical size', 'Manual motor starter:', 'No holding contact'].join('\n') },
+  { section: 'TRANSFORMERS', text: ['Transformer:', 'Rule 26-240', '45 kVA transformer installed in attic:', 'Use chain hoist', 'Secondary fault current:', 'Based on transformer impedance'].join('\n') },
+  { section: 'FIRE ALARM', text: ['Class B fire alarm circuit', 'Fire alarm reversed polarity:', 'Trouble signal activates', 'Pull station symbol', 'Nurse emergency call:', 'Reset at nurse call station', 'Stage 2 fire alarm:', 'Illuminated light', 'System in alert stage', 'Action required within 5 minutes', 'Smallest conductor in race alarm raceway:', '#19 AWG'].join('\n') },
+  { section: 'EMERGENCY SYSTEMS', text: ['Storage batteries:', 'Maintain 91%', 'Emergency batteries:', 'Keep maintained', 'Keep fully charged', 'Emergency supply:', '30 minutes', 'Emergency lights:', 'Test monthly'].join('\n') },
+  { section: 'SECTION 10 – GROUNDING & BONDING', text: ['High-voltage fence fabric:', 'Bond in 2 locations', 'Outdoor pad-mounted transformer:', 'Minimum 4 rods', 'CAD (Exothermic) Welding Components:', 'Bonding cable', 'Welding mold', 'Welding compound', 'Ignition compound -> Last material on top', 'Purpose:', 'Permanent bonding/grounding connection'].join('\n') },
+  { section: 'SECTION 12 – WIRING METHODS', text: ['Minimum conduit size for service conductor:', '21 mm (¾")', 'NMSC under dwelling driveway:', '600 V', 'Minimum cover = 900 mm', 'Cellular floors:', 'Maximum conductor size = 1/0', 'Receptacle box in drywall:', 'Flush with finished surface', 'Vertical conduit support spacing:', 'Table 21', 'Underground cable splice:', 'Junction box 1000 mm above grade'].join('\n') },
+  { section: 'SECTION 18 / 20 – HAZARDOUS LOCATIONS', text: ['Gasoline dispenser nozzle boot:', 'Class I Zone 0', 'Commercial garage:', 'Area up to 450 mm above floor = Class I Zone 2', 'Zone 22 enclosure:', 'Type 4 or Type 5', 'Box in Zone 22:', 'Type 5'].join('\n') },
+  { section: 'SECTION 26', text: ['Service location:', 'Must comply with supply authority', 'Meter equipment', 'Meter mounting device', 'Supply side service box', '200 A'].join('\n') },
+  { section: 'SECTION 30 – LIGHTING', text: ['HID = High Intensity Discharge', 'Maximum breaker feeding HID lighting circuit:', '40 A', 'Incandescent:', 'Least efficient light source', 'Luminaire beam pattern:', 'Change reflector', 'Exit luminaire:', 'Circuit used for no other purpose', 'Closet luminaire:', 'Acceptable above doorway on wall', 'School luminaires:', 'Protected by metal reflectors', 'Enclosed stairway lighting:', 'Review 5 m note'].join('\n') },
+  { section: 'SECTION 32', text: ['Fire alarm conductors:', '#19 AWG minimum in raceway'].join('\n') },
+  { section: 'SECTION 60 – HEATING / HVAC', text: ['Heating cable under driveway:', '50 mm', 'Heat anticipator:', 'Heats thermostat element', 'Causes cooling to start sooner', 'Furnace call for heat sequence:', 'Ignition', 'Burner heats', 'Fan starts', 'Zone valve:', 'Controls hot water system connected to boiler', 'Short cycle timer:', 'Prevents excessive refrigerator cycling'].join('\n') },
+  { section: 'PLC / CONTROLS', text: ['PLC:', 'Do not tie input and output together', 'Photocell:', 'Adjust sensitivity', 'VFD:', 'Constant torque by maintaining V/F ratio'].join('\n') },
+  { section: 'SAFETY / OHS', text: ['Extension ladder:', '900 mm above roof line', 'MCC exposed live parts:', '2.2 m headroom', 'Basement switch:', 'Top of stairs', 'WHMIS:', 'Training required', 'Access to SDS/MSDS', 'Crane signal to lower boom:', 'Arm extended', 'Fingers closed', 'Thumb down', 'Crane bucket:', 'High visibility vest', 'Lockout (simulado):', 'Machine in operation and broken', 'Ground fault interrupter:', 'Test monthly'].join('\n') },
+  { section: 'ELECTRICAL INSTALLATION', text: ['Rough-in starts:', 'After walls and roof are weather-tight', 'Generator grounding:', 'Supply end', 'Lightning switch:', 'Connected to grounding conductor', 'Multiple power sources to motor controller:', 'Single disconnect means required'].join('\n') },
+  { section: 'COMMUNICATIONS', text: ['Fibre optic cable:', 'Permitted with Class 2 conductors', 'Separation between communication cables and other systems:', '300 mm', 'Class 2 conductor separation:', 'Review 600 mm confirmed in Anotações1'].join('\n') },
+  { section: 'GAS GROUPS', text: ['IIA', 'Propane', 'Gasoline vapours', 'Natural gas', 'IIB', 'Ethylene', 'IIC', 'Hydrogen', 'Acetylene'].join('\n') },
+  { section: 'MISCELLANEOUS', text: ['Plumbing riser diagrams:', 'Mechanical drawings', 'Single neon sign transformer:', '30 A', 'Auxiliary gutters:', '20%', 'Magnetic circuit breaker:', 'Best in extreme temperatures', 'Delta system colours:', 'Black', 'Red', 'Blue', 'Punch down tool:', 'Terminates conductor', 'Cuts conductor', 'Control exit luminaire:', 'Dedicated circuit', 'Acceptable luminaire location in clothes closet:', 'Wall above doorway'].join('\n') }
+];
+
+const defaultNotes = [
+  'I will pass the Red Seal 2026',
+  'CEC realmente usa working space e headroom como conceitos diferentes na Rule 2-308: 1 m de working space com secure footing, enquanto 2,2 m é o headroom em determinadas condições.',
+  [
+    'ANOTAÇÕES1 — RED SEAL ELECTRICIAN',
+    'CEC 2024',
+    '',
+    'SECTION 6 — SERVICES',
+    'Highway clearance = 5.5 m',
+    'Residential driveway = 4.0 m',
+    'Commercial / Industrial driveway = 5.0 m',
+    'Pedestrian area = 3.5 m',
+    'Windows / doors / porches = 1.0 m',
+    'Unguyed service mast = 1.5 m',
+    'Meter mounting device = 200 A',
+    'Metering equipment: ≤ 300 V and ≤ 200 A',
+  ].join('\n'),
+  [
+    'SECTION 8 — LOAD CALCULATIONS',
+    'Show Window Lighting = 650 W/m',
+    'Basement underfloor heating = 75%',
+  ].join('\n'),
+  [
+    'SECTION 10 — GROUNDING & BONDING',
+    'Bonding = Table 2 → Table 16',
+    'High-voltage installation = 4 ground rods',
+    'Impedance grounding conductor = White or Grey',
+  ].join('\n'),
+  [
+    'SECTION 12 — WIRING METHODS',
+    'Raceway = 360°',
+    'Armored cable to stud = 32 mm',
+    'NMSC under driveway = 900 mm',
+    'NMSC 1/0 Cu vertical run = 30 m',
+    'Cable tray to wall = 600 mm',
+    'Underground splice box = 1000 mm above ground',
+    'Gyproc wall recess = 6 mm',
+    'Wood wall = Flush',
+    'Solderless connector minimum = #8 AWG',
+  ].join('\n'),
+  [
+    'SECTION 14 — PROTECTION',
+    'Rule 14-012',
+    '≤ 100 A and ≤ 250 V = 5000 A',
+    '> 100 A and ≤ 250 V = 10000 A',
+  ].join('\n'),
+  [
+    'SECTION 24 — PATIENT CARE',
+    'Safety test = 2 mA',
+    'IMPORTANT: Rule 24-206 mentions 5 mA Hazard Index',
+  ].join('\n'),
+  [
+    'SECTION 28 — MOTORS',
+    'No nameplate = 115% FLA',
+    'IMPORTANT TABLE CORRECTION:',
+    'Table 44 = Three-phase AC motors',
+    'Table 45 = Single-phase AC motors',
+  ].join('\n'),
+  [
+    'SECTION 30 — LIGHTING',
+    'School lighting = Metal reflectors',
+    'Minimum luminaire conductor = #18 AWG',
+  ].join('\n'),
+  [
+    'SECTION 34 — SIGNS',
+    'Single neon sign transformer = 30 A breaker',
+  ].join('\n'),
+  [
+    'SECTION 36 — HIGH VOLTAGE',
+    'Woven = 2',
+    'Ground rods = 4',
+  ].join('\n'),
+  [
+    'SECTION 46 — EMERGENCY SYSTEMS',
+    'Emergency receptacle = 2.5 m',
+  ].join('\n'),
+  [
+    'SECTION 60 — COMMUNICATIONS',
+    'Pool separation = 1 m',
+    'Conductive fibre optic cable = Class 2 conductors',
+  ].join('\n'),
+  [
+    'CAPACITORS',
+    'Capacitors = 135%',
+  ].join('\n'),
+  [
+    'SAFETY',
+    'Ladder above roof = 1 m (3 ft)',
+  ].join('\n'),
+  [
+    'FIRE ALARM',
+    'Alert stage = 5 minutes action',
+  ].join('\n'),
+  [
+    'IMPORTANT TABLES',
+    'Table 2  = Copper',
+    'Table 4  = Aluminum',
+    'Table 12 = SOOW',
+    'Table 16 = Bonding',
+    'Table 44 = Three-phase AC motors',
+    'Table 45 = Single-phase AC motors',
+    'Table 61 = Communications / Pools',
+  ].join('\n'),
+  ...studyNotesFromDocument,
+];
+
+let notes = dedupeNotes(JSON.parse(localStorage.getItem('redSealNotes') || 'null') || defaultNotes);
 
 const sectionNames = [...new Set(questions.map((question) => question.section || 'General CEC 2024'))];
 selectedSection = sectionNames[0];
@@ -2507,48 +2928,266 @@ function saveNotes() {
   localStorage.setItem('redSealNotes', JSON.stringify(notes));
 }
 
+function renderVocabulary() {
+  if (!vocabularyList) return;
+
+  vocabularyList.innerHTML = '';
+
+  const header = document.createElement('div');
+  header.className = 'vocab-header';
+
+  ['Termo', 'Significado', 'Cuidado'].forEach((label) => {
+    const headerCell = document.createElement('div');
+    headerCell.className = 'vocab-header-cell';
+    headerCell.textContent = label;
+    header.appendChild(headerCell);
+  });
+
+  vocabularyList.appendChild(header);
+
+  [...vocabularyTerms]
+    .sort((a, b) => a.term.localeCompare(b.term, 'pt-BR'))
+    .forEach(({ term, meaning, note }) => {
+      const item = document.createElement('div');
+      item.className = 'vocab-item';
+
+      const termEl = document.createElement('div');
+      termEl.className = 'vocab-term';
+      termEl.textContent = term;
+
+      const meaningEl = document.createElement('div');
+      meaningEl.className = 'vocab-meaning';
+      meaningEl.textContent = meaning;
+
+      const noteEl = document.createElement('div');
+      noteEl.className = 'vocab-note';
+      noteEl.textContent = note;
+
+      item.append(termEl, meaningEl, noteEl);
+      vocabularyList.appendChild(item);
+    });
+}
+
+function renderAcronyms() {
+  if (!acronymsList) return;
+
+  acronymsList.innerHTML = '';
+
+  const header = document.createElement('div');
+  header.className = 'vocab-header';
+
+  ['Acronym', 'Meaning', 'Note'].forEach((label) => {
+    const headerCell = document.createElement('div');
+    headerCell.className = 'vocab-header-cell';
+    headerCell.textContent = label;
+    header.appendChild(headerCell);
+  });
+
+  acronymsList.appendChild(header);
+
+  acronymTerms.forEach(({ acronym, meaning, note }) => {
+    const item = document.createElement('div');
+    item.className = 'vocab-item';
+
+    const acronymEl = document.createElement('div');
+    acronymEl.className = 'vocab-term';
+    acronymEl.textContent = acronym;
+
+    const meaningEl = document.createElement('div');
+    meaningEl.className = 'vocab-meaning';
+    meaningEl.textContent = meaning;
+
+    const noteEl = document.createElement('div');
+    noteEl.className = 'vocab-note';
+    noteEl.textContent = note;
+
+    item.append(acronymEl, meaningEl, noteEl);
+    acronymsList.appendChild(item);
+  });
+}
+
+function normalizeNoteEntry(note) {
+  const rawText = typeof note === 'string' ? note : note?.text || '';
+  const explicitSection = typeof note === 'object' && note && note.section ? String(note.section).trim() : '';
+  const lines = rawText
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
+
+  const sectionLine = explicitSection || lines.find((line) => /^SECTION\s+/i.test(line) || /^SEÇÃO\s+/i.test(line)) || selectedSection || 'Notes';
+  const bodyText = explicitSection ? rawText.trim() : sectionLine && rawText.includes(sectionLine)
+    ? lines.filter((line) => line !== sectionLine).join('\n')
+    : rawText.trim();
+
+  return {
+    section: sectionLine,
+    text: bodyText || rawText.trim(),
+  };
+}
+
+function dedupeNotes(list) {
+  const uniqueNotes = [];
+  const seen = new Set();
+
+  (Array.isArray(list) ? list : []).forEach((note) => {
+    const normalized = normalizeNoteEntry(note);
+    const key = `${normalized.section}::${normalized.text}`.replace(/\s+/g, ' ').trim().toLowerCase();
+
+    if (!normalized.text || seen.has(key)) {
+      return;
+    }
+
+    seen.add(key);
+    uniqueNotes.push({
+      section: normalized.section,
+      text: normalized.text,
+    });
+  });
+
+  return uniqueNotes;
+}
+
+function addUniqueNote(entry) {
+  const normalized = normalizeNoteEntry(entry);
+  if (!normalized.text) {
+    return;
+  }
+
+  const key = `${normalized.section}::${normalized.text}`.replace(/\s+/g, ' ').trim().toLowerCase();
+  const alreadyExists = notes.some((current) => {
+    const currentNormalized = normalizeNoteEntry(current);
+    return `${currentNormalized.section}::${currentNormalized.text}`.replace(/\s+/g, ' ').trim().toLowerCase() === key;
+  });
+
+  if (!alreadyExists) {
+    notes.push({
+      section: normalized.section,
+      text: normalized.text,
+    });
+  }
+}
+
 function renderNotes() {
   notesList.innerHTML = '';
 
   if (notes.length === 0) {
-    notesList.innerHTML = '<p class="empty-notes">Nenhuma anotação ainda.</p>';
+    notesList.innerHTML = '<p class="empty-notes">No notes yet.</p>';
     return;
   }
 
-  notes.forEach((note, index) => {
-    const noteItem = document.createElement('div');
-    noteItem.className = 'note-item';
+  const groupedNotes = new Map();
 
-    const noteText = document.createElement('span');
-    noteText.textContent = note;
+  notes.forEach((note) => {
+    const normalized = normalizeNoteEntry(note);
+    const key = normalized.section;
 
-    const deleteButton = document.createElement('button');
-    deleteButton.type = 'button';
-    deleteButton.className = 'delete-note-btn';
-    deleteButton.textContent = 'Excluir';
-    deleteButton.addEventListener('click', () => {
-      notes.splice(index, 1);
-      saveNotes();
-      renderNotes();
+    if (!groupedNotes.has(key)) {
+      groupedNotes.set(key, []);
+    }
+
+    groupedNotes.get(key).push({
+      text: normalized.text,
+    });
+  });
+
+  groupedNotes.forEach((entries, sectionName) => {
+    const sectionGroup = document.createElement('div');
+    sectionGroup.className = 'note-section-group';
+
+    const sectionTitle = document.createElement('h3');
+    sectionTitle.className = 'note-section-title';
+    sectionTitle.textContent = sectionName;
+    sectionGroup.appendChild(sectionTitle);
+
+    entries.forEach(({ text }) => {
+      const noteItem = document.createElement('div');
+      noteItem.className = 'note-item';
+
+      const noteText = document.createElement('span');
+      noteText.textContent = text;
+
+      noteItem.append(noteText);
+      sectionGroup.appendChild(noteItem);
     });
 
-    noteItem.append(noteText, deleteButton);
-    notesList.appendChild(noteItem);
+    notesList.appendChild(sectionGroup);
   });
 }
 
-notesToggleBtn.addEventListener('click', () => {
-  const isOpen = !notesPanel.hidden;
-  notesPanel.hidden = isOpen;
-  notesToggleBtn.setAttribute('aria-expanded', String(!isOpen));
-  if (!isOpen) noteInput.focus();
-});
+function showSetupScreen() {
+  setupScreen.hidden = false;
+  notesScreen.hidden = true;
+  vocabularyScreen.hidden = true;
+  acronymsScreen.hidden = true;
+  quizScreen.hidden = true;
+  setupScreen.classList.remove('hidden');
+  notesScreen.classList.add('hidden');
+  vocabularyScreen.classList.add('hidden');
+  acronymsScreen.classList.add('hidden');
+  quizScreen.classList.add('hidden');
+  notesToggleBtn.setAttribute('aria-expanded', 'false');
+}
+
+function showNotesScreen() {
+  setupScreen.hidden = true;
+  notesScreen.hidden = false;
+  vocabularyScreen.hidden = true;
+  acronymsScreen.hidden = true;
+  quizScreen.hidden = true;
+  setupScreen.classList.add('hidden');
+  notesScreen.classList.remove('hidden');
+  vocabularyScreen.classList.add('hidden');
+  acronymsScreen.classList.add('hidden');
+  quizScreen.classList.add('hidden');
+  notesToggleBtn.setAttribute('aria-expanded', 'true');
+  noteInput.focus();
+}
+
+function showVocabularyScreen() {
+  setupScreen.hidden = true;
+  notesScreen.hidden = true;
+  vocabularyScreen.hidden = false;
+  acronymsScreen.hidden = true;
+  quizScreen.hidden = true;
+  setupScreen.classList.add('hidden');
+  notesScreen.classList.add('hidden');
+  vocabularyScreen.classList.remove('hidden');
+  acronymsScreen.classList.add('hidden');
+  quizScreen.classList.add('hidden');
+  notesToggleBtn.setAttribute('aria-expanded', 'false');
+  renderVocabulary();
+}
+
+function showAcronymsScreen() {
+  setupScreen.hidden = true;
+  notesScreen.hidden = true;
+  vocabularyScreen.hidden = true;
+  acronymsScreen.hidden = false;
+  quizScreen.hidden = true;
+  setupScreen.classList.add('hidden');
+  notesScreen.classList.add('hidden');
+  vocabularyScreen.classList.add('hidden');
+  acronymsScreen.classList.remove('hidden');
+  quizScreen.classList.add('hidden');
+  notesToggleBtn.setAttribute('aria-expanded', 'false');
+  renderAcronyms();
+}
+
+notesToggleBtn.addEventListener('click', showNotesScreen);
+vocabularyBtn.addEventListener('click', showVocabularyScreen);
+acronymsBtn.addEventListener('click', showAcronymsScreen);
+backToSetupBtn.addEventListener('click', showSetupScreen);
+backToSetupFromVocabularyBtn.addEventListener('click', showSetupScreen);
+backToSetupFromAcronymsBtn.addEventListener('click', showSetupScreen);
 
 saveNoteBtn.addEventListener('click', () => {
   const note = noteInput.value.trim();
   if (!note) return;
 
-  notes.push(note);
+  addUniqueNote({
+    section: selectedSection || 'Notes',
+    text: note,
+  });
   saveNotes();
   noteInput.value = '';
   renderNotes();
@@ -2674,7 +3313,7 @@ function showResult() {
       <p>
       ${score === quizQuestions.length
           ? 'Excellent! You got every question correct.'
-          : percentage >= 60
+          : percentage >= 70
             ? 'Very good! You did well on the quiz.'
             : 'You can try again to improve your score.'}
       </p>
@@ -2695,8 +3334,14 @@ function resetQuiz() {
   quizFinished = false;
   quizScreen.hidden = true;
   setupScreen.hidden = false;
+  notesScreen.hidden = true;
+  vocabularyScreen.hidden = true;
+  acronymsScreen.hidden = true;
   quizScreen.classList.add('hidden');
   setupScreen.classList.remove('hidden');
+  notesScreen.classList.add('hidden');
+  vocabularyScreen.classList.add('hidden');
+  acronymsScreen.classList.add('hidden');
   resetBtn.hidden = false;
   previousBtn.hidden = false;
   previousBtn.disabled = true;

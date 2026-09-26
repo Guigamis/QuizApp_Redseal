@@ -10,28 +10,85 @@
     <main class="quiz-container">
       <div class="quiz-card">
         <section id="cec-setup-screen" class="setup-screen">
-          <p class="eyebrow">Quiz Red Seal</p>
-          <h1>Select Options</h1>
-          <div id="section-options" class="section-options" aria-label="CEC 2024 sections"></div>
-          <div class="setup-choice-layout">
-            <div class="question-count-options" aria-label="Number of questions">
-              <button class="count-btn" type="button" data-question-count="15">15 questions</button>
-              <button class="count-btn" type="button" data-question-count="30">30 questions</button>
-              <button class="count-btn" type="button" data-question-count="50">50 questions</button>
-              <button class="count-btn" type="button" data-question-count="all">All questions</button>
+          <div class="setup-header">
+            <div>
+              <p class="eyebrow">Quiz Red Seal</p>
+              <h1>Select Options</h1>
             </div>
           </div>
 
-          <div class="notes-area">
-            <button id="notes-toggle-btn" class="notes-toggle-btn" type="button" aria-expanded="false" aria-controls="notes-panel">
-              Anotações
-            </button>
-            <div id="notes-panel" class="notes-panel" hidden>
-              <label for="note-input">Escreva uma anotação</label>
-              <textarea id="note-input" rows="3" placeholder="Ex.: revisar instalações elétricas"></textarea>
-              <button id="save-note-btn" class="primary-btn" type="button">Salvar anotação</button>
-              <div id="notes-list" class="notes-list" aria-live="polite"></div>
+          <div class="setup-content">
+            <div class="setup-panel setup-left-panel">
+              <div class="question-count-options" aria-label="Number of questions">
+                <div class="setup-row">
+                  <button class="count-btn" type="button" data-question-count="15">15 questions</button>
+                </div>
+
+                <div class="setup-row">
+                  <button class="count-btn" type="button" data-question-count="30">30 questions</button>
+                </div>
+
+                <div class="setup-row">
+                  <button class="count-btn" type="button" data-question-count="50">50 questions</button>
+                </div>
+
+                <div class="setup-row">
+                  <button class="count-btn" type="button" data-question-count="all">All questions</button>
+                </div>
+
+                <div class="utility-row">
+                  <button id="notes-toggle-btn" class="notes-toggle-btn" type="button" aria-expanded="false" aria-controls="notes-panel">
+                    Notes
+                  </button>
+                  <button id="vocabulary-btn" class="vocabulary-btn" type="button">
+                    Vocabulary
+                  </button>
+                  <button id="acronyms-btn" class="acronyms-btn" type="button">
+                    ACRONYMS AND ABBREVIATIONS
+                  </button>
+                </div>
+              </div>
             </div>
+
+            <div class="setup-panel setup-right-panel">
+              <div id="section-options" class="section-options" aria-label="CEC 2024 sections"></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="notes-screen" class="notes-screen hidden" hidden>
+          <div class="notes-header">
+            <h1>Notes</h1>
+            <button id="back-to-setup-btn" class="secondary-btn" type="button">Back</button>
+          </div>
+
+          <div id="notes-panel" class="notes-panel">
+            <div id="notes-list" class="notes-list" aria-live="polite"></div>
+            <label for="note-input">Write a note</label>
+            <textarea id="note-input" rows="3" placeholder="Ex.: review electrical installations"></textarea>
+            <button id="save-note-btn" class="primary-btn" type="button">Save note</button>
+          </div>
+        </section>
+
+        <section id="vocabulary-screen" class="vocabulary-screen hidden" hidden>
+          <div class="notes-header">
+            <h1>Vocabulary</h1>
+            <button id="back-to-setup-from-vocabulary-btn" class="secondary-btn" type="button">Back</button>
+          </div>
+
+          <div class="vocabulary-panel">
+            <div id="vocabulary-list" class="vocabulary-list" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section id="acronyms-screen" class="vocabulary-screen hidden" hidden>
+          <div class="notes-header">
+            <h1>Acronyms and Abbreviations</h1>
+            <button id="back-to-setup-from-acronyms-btn" class="secondary-btn" type="button">Back</button>
+          </div>
+
+          <div class="vocabulary-panel">
+            <div id="acronyms-list" class="vocabulary-list" aria-live="polite"></div>
           </div>
         </section>
 
@@ -45,7 +102,7 @@
             <button id="previous-btn" class="secondary-btn" type="button">Previous</button>
             <button id="reset-btn" class="secondary-btn" type="button">Reset</button>
             <div class="navigation-buttons">
-              <button id="next-btn" class="primary-btn" type="button">Próxima questão</button>
+              <button id="next-btn" class="primary-btn" type="button">Next question</button>
             </div>
           </div>
         </section>
