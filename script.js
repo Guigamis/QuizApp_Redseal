@@ -8,6 +8,11 @@
 //   options: ['Rio de Janeiro', 'Brasilia', 'São Paulo', 'Salvador'],
 //   answer: 1,
 // }
+// {
+//   question: '',
+//   options: ['', '', '', ''],
+//   answer: 1,
+// },
 
 const questions = [
   {
@@ -1798,7 +1803,7 @@ const questions = [
   {
     question: 'A 45 micro-farad, 347V capacitor has gone faulty and needs to be replaced. The original capacitor size is not available, what size capacitor is suitable to use as the replacement?',
     options: ['45 micro farad, 250V', '35 micro farad, 347V', '55 micro farad, 120V', '45 micro farad, 120V'],
-    answer: 2,
+    answer: 1,
   },
   {
     question: 'How often should a visual inspection be done on high voltage gloves?',
@@ -2018,7 +2023,7 @@ const questions = [
   {
     question: 'What is required when outdoor receptacles are installed within 2.5 m of grade level on a single family dwelling?',
     options: ['A solid cover must be provided', 'The circuit must be GFCI protected', 'An insulated ground conductors must be used', 'The enclosures must be provided with drain holes'],
-    answer: 0,
+    answer: 1,
   },
   {
     question: 'What is the minimum height from the floor level that emergency lighting unit must be installed?',
@@ -2660,9 +2665,99 @@ const questions = [
     options: ['At the maximum welding output current marked on the nameplate', 'At 125% of the rated primary current, as for a continuous load', 'At the rated primary current reduced by a duty-cycle factor', 'At the full rated primary current, with no duty-cycle allowance'],
     answer: 2,
   },
+  {
+    question: 'On a schematic diagram, which type of interlock is indicated by a dashed line between 2 motor starters?',
+    options: ['Mechanical', 'Electrical', 'Auxiliary contact', 'Push button'],
+    answer: 0,
+  },
+  {
+    question: 'What is the procedure for testing an HPS lamp socket for power?',
+    options: ['Use digital VOM, then check from centre contact to ground', 'Use digital VOM, then check from shell to centre contact', 'Use analog VOM, then check from centre contact to ground', 'Use analog VOM, then check from shell to ground'],
+    answer: 1,
+  },
+  {
+    question: 'On a 347/600 V system, what is the maximum current rating of a standard cartridge fuse?',
+    options: ['30A', '60A', '225A', '600A'],
+    answer: 3,
+  },
+  {
+    question: 'The contacts of the centrifugal switch in a single-phase motor do not close due to an accumulation of saw dust on the switch. What is the result?',
+    options: ['No voltage will be supplied to any of the running winding', 'The motor will not reach full rated speed', 'The starting winding will burn out in a very short time', 'The running winding will be energized but the motor will not start'],
+    answer: 3,
+  },
+  {
+    question: 'On an online UPS, which component prevents AC voltage spikes from reaching the load?',
+    options: ['Rectifier', 'Lead acid battery', 'Inverter', 'Surge suppressor'],
+    answer: 3,
+  },
+  {
+    question: 'A PLC, operating in an assembly line, has intermittent electrostatic noise on the inputs. What is the cause?',
+    options: ['Defective motor', 'Failed power supply', 'Defective drive', 'Failed bond conductor'],
+    answer: 3,
+  },
+  {
+    question: 'When checked with an ohmmeter, a capacitor reads 0 Ω. What is the capacitors condition?',
+    options: ['Open-circuited', 'Short-circuited', 'Grounded', 'Within specifications'],
+    answer: 1,
+  },
+  {
+    question: 'Before working on an ionized dust-collection system, what is the first step?',
+    options: ['Clean the system', 'De-ionize the system', 'De-energize the system', 'Install grounding jumpers'],
+    answer: 2,
+  },
+  {
+    question: 'In an environmental regulating system, which type of signal does a pressure transmitter output?',
+    options: ['0 to 5 V AC', '0 to 5 V DC', '4 to 20mA AC', '4 to 20mA DC'],
+    answer: 3,
+  },
+  {
+    question: 'When isolating the circuit controlled by a 15 kV pull-out breaker in a substation, what is the minimum required class of insulated glove?',
+    options: ['0', '1', '2', '3'],
+    answer: 3,
+  },
+  {
+    question: 'What is the sequence of operation for an inline electric duct heater?',
+    options: ['Heating contactor closes, then air flow switch closes', 'Air flow switch closes before heating contactor closes', 'Air flow switch opens before heating contactor closes', 'Heating contactor closes, then air flow switch opens'],
+    answer: 1,
+  },
+  {
+    question: '',
+    options: ['', '', '', ''],
+    answer: 1,
+  },
+  {
+    question: '',
+    options: ['', '', '', ''],
+    answer: 1,
+  },
+  {
+    question: '',
+    options: ['', '', '', ''],
+    answer: 1,
+  },
+  {
+    question: '',
+    options: ['', '', '', ''],
+    answer: 1,
+  },
+  {
+    question: '',
+    options: ['', '', '', ''],
+    answer: 1,
+  },
+  {
+    question: '',
+    options: ['', '', '', ''],
+    answer: 1,
+  },
+  {
+    question: '',
+    options: ['', '', '', ''],
+    answer: 1,
+  },
+
 
   ]
-
 
 
   
@@ -2793,33 +2888,159 @@ let selectedSection = '';
 let answerSelections = [];
 
 const studyNotesFromDocument = [
-  { section: 'THEORY', text: ['Vf = VL / √3', 'Full-wave rectifier:', 'VDC ≈ VAC × 0.9', 'Impedance triangle:', 'Z = √(R² + X²)', 'Three transformers in delta:', 'Remove one transformer', 'Remaining capacity = 57.7%', 'Fault current at transformer secondary:', 'Isc = FLC / Zpu', '4–20 mA:', 'Span = 16 mA', '50% = 12 mA', 'Lamp life increases with lower voltage.'].join('\n') },
-  { section: 'MOTORS', text: ['Motor fuse (time-delay) = 225%', 'Hermetic compressor fuse = 300%', 'Fire pump conductors = 125%', 'Centrifugal switch:', 'Closed when motor stopped', 'Opens at approximately 75–80% speed', 'Opens too early → motor may not start', 'Stuck closed → start winding remains energized and may burn', 'Shunt motor:', 'Used when speed is more important than torque', 'Missing phase on 3Ø motor:', 'Check overcurrent devices first', 'Motor exposed to moisture:', 'Isolate motor', 'Test each phase', 'Contactor humming:', 'Possible low voltage', 'Replacing contactor coil:', 'Verify voltage', 'Verify physical size', 'Manual motor starter:', 'No holding contact'].join('\n') },
-  { section: 'TRANSFORMERS', text: ['Transformer:', 'Rule 26-240', '45 kVA transformer installed in attic:', 'Use chain hoist', 'Secondary fault current:', 'Based on transformer impedance'].join('\n') },
-  { section: 'FIRE ALARM', text: ['Class B fire alarm circuit', 'Fire alarm reversed polarity:', 'Trouble signal activates', 'Pull station symbol', 'Nurse emergency call:', 'Reset at nurse call station', 'Stage 2 fire alarm:', 'Illuminated light', 'System in alert stage', 'Action required within 5 minutes', 'Smallest conductor in race alarm raceway:', '#19 AWG'].join('\n') },
-  { section: 'EMERGENCY SYSTEMS', text: ['Storage batteries:', 'Maintain 91%', 'Emergency batteries:', 'Keep maintained', 'Keep fully charged', 'Emergency supply:', '30 minutes', 'Emergency lights:', 'Test monthly'].join('\n') },
-  { section: 'SECTION 10 – GROUNDING & BONDING', text: ['High-voltage fence fabric:', 'Bond in 2 locations', 'Outdoor pad-mounted transformer:', 'Minimum 4 rods', 'CAD (Exothermic) Welding Components:', 'Bonding cable', 'Welding mold', 'Welding compound', 'Ignition compound -> Last material on top', 'Purpose:', 'Permanent bonding/grounding connection'].join('\n') },
-  { section: 'SECTION 12 – WIRING METHODS', text: ['Minimum conduit size for service conductor:', '21 mm (¾")', 'NMSC under dwelling driveway:', '600 V', 'Minimum cover = 900 mm', 'Cellular floors:', 'Maximum conductor size = 1/0', 'Receptacle box in drywall:', 'Flush with finished surface', 'Vertical conduit support spacing:', 'Table 21', 'Underground cable splice:', 'Junction box 1000 mm above grade'].join('\n') },
-  { section: 'SECTION 18 / 20 – HAZARDOUS LOCATIONS', text: ['Gasoline dispenser nozzle boot:', 'Class I Zone 0', 'Commercial garage:', 'Area up to 450 mm above floor = Class I Zone 2', 'Zone 22 enclosure:', 'Type 4 or Type 5', 'Box in Zone 22:', 'Type 5'].join('\n') },
-  { section: 'SECTION 26', text: ['Service location:', 'Must comply with supply authority', 'Meter equipment', 'Meter mounting device', 'Supply side service box', '200 A'].join('\n') },
-  { section: 'SECTION 30 – LIGHTING', text: ['HID = High Intensity Discharge', 'Maximum breaker feeding HID lighting circuit:', '40 A', 'Incandescent:', 'Least efficient light source', 'Luminaire beam pattern:', 'Change reflector', 'Exit luminaire:', 'Circuit used for no other purpose', 'Closet luminaire:', 'Acceptable above doorway on wall', 'School luminaires:', 'Protected by metal reflectors', 'Enclosed stairway lighting:', 'Review 5 m note'].join('\n') },
-  { section: 'SECTION 32', text: ['Fire alarm conductors:', '#19 AWG minimum in raceway'].join('\n') },
-  { section: 'SECTION 60 – HEATING / HVAC', text: ['Heating cable under driveway:', '50 mm', 'Heat anticipator:', 'Heats thermostat element', 'Causes cooling to start sooner', 'Furnace call for heat sequence:', 'Ignition', 'Burner heats', 'Fan starts', 'Zone valve:', 'Controls hot water system connected to boiler', 'Short cycle timer:', 'Prevents excessive refrigerator cycling'].join('\n') },
-  { section: 'PLC / CONTROLS', text: ['PLC:', 'Do not tie input and output together', 'Photocell:', 'Adjust sensitivity', 'VFD:', 'Constant torque by maintaining V/F ratio'].join('\n') },
-  { section: 'SAFETY / OHS', text: ['Extension ladder:', '900 mm above roof line', 'MCC exposed live parts:', '2.2 m headroom', 'Basement switch:', 'Top of stairs', 'WHMIS:', 'Training required', 'Access to SDS/MSDS', 'Crane signal to lower boom:', 'Arm extended', 'Fingers closed', 'Thumb down', 'Crane bucket:', 'High visibility vest', 'Lockout (simulado):', 'Machine in operation and broken', 'Ground fault interrupter:', 'Test monthly'].join('\n') },
-  { section: 'ELECTRICAL INSTALLATION', text: ['Rough-in starts:', 'After walls and roof are weather-tight', 'Generator grounding:', 'Supply end', 'Lightning switch:', 'Connected to grounding conductor', 'Multiple power sources to motor controller:', 'Single disconnect means required'].join('\n') },
-  { section: 'COMMUNICATIONS', text: ['Fibre optic cable:', 'Permitted with Class 2 conductors', 'Separation between communication cables and other systems:', '300 mm', 'Class 2 conductor separation:', 'Review 600 mm confirmed in Anotações1'].join('\n') },
-  { section: 'GAS GROUPS', text: ['IIA', 'Propane', 'Gasoline vapours', 'Natural gas', 'IIB', 'Ethylene', 'IIC', 'Hydrogen', 'Acetylene'].join('\n') },
-  { section: 'MISCELLANEOUS', text: ['Plumbing riser diagrams:', 'Mechanical drawings', 'Single neon sign transformer:', '30 A', 'Auxiliary gutters:', '20%', 'Magnetic circuit breaker:', 'Best in extreme temperatures', 'Delta system colours:', 'Black', 'Red', 'Blue', 'Punch down tool:', 'Terminates conductor', 'Cuts conductor', 'Control exit luminaire:', 'Dedicated circuit', 'Acceptable luminaire location in clothes closet:', 'Wall above doorway'].join('\n') }
+  [
+    'Study Notes - Theory',
+    'Vf = VL / √3',
+    'Full-wave rectifier:',
+    'VDC ≈ VAC × 0.9',
+    'Impedance triangle: Z = √(R² + X²)',
+    'Three transformers in delta, Remove one transformer = Remaining capacity = 57.7%',
+    'Fault current at transformer secondary: Isc = FLC / Zpu',
+    '4–20 mA: Span = 16 mA 50% = 12 mA',
+    'Lamp life increases with lower voltage.',
+    'Centrifugal switch - Closed when motor stopped',
+    'Opens at approximately 75–80% speed',
+    'Opens too early → motor may not start',
+    'Stuck closed → start winding remains energized and may burn',
+    'Shunt motor: Used when speed is more important than torque'
+  ].join('\n'),
+  [
+    'Missing phase on 3Ø motor:Check overcurrent devices first',
+    'Motor exposed to moisture:Isolate motor, Test each phase',
+    'Contactor humming:Possible low voltage',
+    'Replacing contactor coil:Verify voltage, Verify physical size',
+    'Manual motor starter:No holding contact',
+
+  ].join('\n'),
+  [
+    'TRANSFORMERS',
+    'Transformer: Rule 26-240',
+    '45 kVA transformer installed in attic:Use chain hoist',
+    'Secondary fault current:Based on transformer impedance',
+  ].join('\n'),
+  [
+    'FIRE ALARM',
+    'Class B fire alarm circuit',
+    'Fire alarm reversed polarity:Trouble signal activates',
+    'Nurse emergency call:Reset at nurse call station',
+    'Stage 2 fire alarm:Illuminated light, System in alert stage, Action required within 5 minutes',
+    'Smallest conductor in race alarm raceway:#19 AWG',
+  ].join('\n'),
+  [
+    'EMERGENCY SYSTEMS',
+    'Storage batteries:Maintain 91%',
+    'Emergency batteries:Keep maintained, Keep fully charged',
+    'Emergency supply:30 minutes',
+    'Emergency lights:Test monthly',
+  ].join('\n'),
+  [
+    'SECTION 10 – GROUNDING & BONDING',
+    'High-voltage fence fabric:Bond in 2 locations',
+    'Outdoor pad-mounted transformer:Minimum 4 rods',
+    'CAD (Exothermic) Welding Components:Bonding cable, Welding mold, Welding compound, Ignition compound -> Last material on top',
+  ].join('\n'),
+  [
+    'SECTION 12 – WIRING METHODS',
+    'Minimum conduit size for service conductor:21 mm (¾")',
+    'NMSC under dwelling driveway:600 V',
+    'Minimum cover = 900 mm',
+    'Cellular floors:Maximum conductor size = 1/0',
+    'Receptacle box in drywall:Flush with finished surface',
+    'Vertical conduit support spacing:Table 21',
+    'Underground cable splice: Junction box 1000 mm above grade',
+  ].join('\n'),
+  [
+    'SECTION 18 / 20 – HAZARDOUS LOCATIONS',
+    'Gasoline dispenser nozzle boot:Class I Zone 0',
+    'Commercial garage:Area up to 450 mm above floor = Class I Zone 2',
+
+  ].join('\n'),
+  [
+    'SECTION 26',
+    'Service location:Must comply with supply authority',
+    'Meter equipment',
+    'Meter mounting device',
+    'Supply side service box',
+    '200 A',
+  ].join('\n'),
+  [
+    'SECTION 30 – LIGHTING',
+    'HID = High Intensity Discharge',
+    'Maximum breaker feeding HID lighting circuit:40 A',
+    'Incandescent:Least efficient light source',
+    'Luminaire beam pattern:Change reflector',
+    'Exit luminaire:Circuit used for no other purpose',
+    'Closet luminaire:Acceptable above doorway on wall',
+    'School luminaires:Protected by metal reflectors',
+    'Enclosed stairway lighting:Review 5 m note',
+  ].join('\n'),
+  [
+    'SECTION 60 – HEATING / HVAC',
+    'Heating cable under driveway:50 mm',
+    'Heat anticipator:Heats thermostat element, Causes cooling to start sooner',
+    'Furnace call for heat sequence:Ignition, Burner heats, Fan starts',
+    'Zone valve:Controls hot water system connected to boiler',
+    'Short cycle timer:Prevents excessive refrigerator cycling',
+  ].join('\n'),
+  [
+    'SECTION — PLC / CONTROLS',
+    'PLC:Do not tie input and output together',
+    'Photocell:Adjust sensitivity',
+    'VFD:Constant torque by maintaining V/F ratio',
+  ].join('\n'),
+  [
+    'SECTION — SAFETY / OHS',
+    'Extension ladder:900 mm above roof line',
+    'MCC exposed live parts:2.2 m headroom',
+    'Basement switch:Top of stairs',
+    'WHMIS:Training required, Access to SDS/MSDS',
+    'Crane signal to lower boom:Arm extended, Fingers closed, Thumb down',
+    'Crane bucket:High visibility vest',
+    'Lockout (simulado):Machine in operation and broken',
+    'Ground fault interrupter:Test monthly',
+  ].join('\n'),
+  [
+    'ELECTRICAL INSTALLATION',
+    'Rough-in starts:After walls and roof are weather-tight',
+    'Generator grounding:Supply end',
+    'Lightning switch:Connected to grounding conductor',
+    'Multiple power sources to motor controller:Single disconnect means required',
+  ].join('\n'),
+  [
+    'COMMUNICATIONS',
+    'Fibre optic cable:Permitted with Class 2 conductors',
+    'Separation between communication cables and other systems:300 mm',
+    'Class 2 conductor separation:Review 600 mm confirmed in Anotações1',
+  ].join('\n'),
+  [
+    'GAS GROUPS',
+    'IIA',
+    'Propane',
+    'Gasoline vapours',
+    'Natural gas',
+    'IIB',
+    'Ethylene',
+    'IIC',
+    'Hydrogen',
+    'Acetylene',
+  ].join('\n'),
+  [
+    'SECTION — MISCELLANEOUS',
+    'Plumbing riser diagrams:Mechanical drawings',
+    'Single neon sign transformer:30 A',
+    'Auxiliary gutters:20%',
+    'Magnetic circuit breaker:Best in extreme temperatures',
+    'Delta system colours:Black, Red, Blue',
+    'Punch down tool:Terminates conductor, Cuts conductor',
+    'Control exit luminaire:Dedicated circuit',
+    'Acceptable luminaire location in clothes closet:Wall above doorway',
+  ].join('\n'),
 ];
 
 const defaultNotes = [
   'I will pass the Red Seal 2026',
   'CEC realmente usa working space e headroom como conceitos diferentes na Rule 2-308: 1 m de working space com secure footing, enquanto 2,2 m é o headroom em determinadas condições.',
   [
-    'ANOTAÇÕES1 — RED SEAL ELECTRICIAN',
-    'CEC 2024',
-    '',
     'SECTION 6 — SERVICES',
     'Highway clearance = 5.5 m',
     'Residential driveway = 4.0 m',
@@ -2867,7 +3088,11 @@ const defaultNotes = [
   [
     'SECTION 28 — MOTORS',
     'No nameplate = 115% FLA',
-    'IMPORTANT TABLE CORRECTION:',
+    'Time-Delay fuse = 175% FLA',
+    'Non-Time-Delay fuse = 300% FLA',
+    'Inverse Circuit Breaker = 250% FLA',
+    'Hermetic compressor fuse = 300% FLA',
+    'Table 29 = Rating or Setting of overcurrent devices for the protection of motor branch circuits',
     'Table 44 = Three-phase AC motors',
     'Table 45 = Single-phase AC motors',
   ].join('\n'),
@@ -2882,6 +3107,7 @@ const defaultNotes = [
   ].join('\n'),
   [
     'SECTION 36 — HIGH VOLTAGE',
+    'High-voltage fence fabric:Bond in 2 locations',
     'Woven = 2',
     'Ground rods = 4',
   ].join('\n'),
@@ -2895,15 +3121,12 @@ const defaultNotes = [
     'Conductive fibre optic cable = Class 2 conductors',
   ].join('\n'),
   [
-    'CAPACITORS',
-    'Capacitors = 135%',
-  ].join('\n'),
-  [
     'SAFETY',
     'Ladder above roof = 1 m (3 ft)',
   ].join('\n'),
   [
-    'FIRE ALARM',
+    'Section 32 — Fire Alarms System and fire pumps',
+    'Fire pump conductors = 125%',
     'Alert stage = 5 minutes action',
   ].join('\n'),
   [
@@ -2918,6 +3141,8 @@ const defaultNotes = [
   ].join('\n'),
   ...studyNotesFromDocument,
 ];
+
+
 
 let notes = dedupeNotes(JSON.parse(localStorage.getItem('redSealNotes') || 'null') || defaultNotes);
 
