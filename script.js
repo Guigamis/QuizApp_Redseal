@@ -956,7 +956,7 @@ const questions = [
     answer: 0,
   },
   {
-    question: 'Where an electrical system is connected to an impedance grounding device, the system:Where an electrical system is connected to an impedance grounding device, the system:',
+    question: 'Where an electrical system is connected to an impedance grounding device, the system',
     options: ['can be maintained by anyone', 'must be maintained by a qualified person', 'does not need to be maintained', 'can only be maintained by the system owner'],
     answer: 1,
   },
@@ -1298,7 +1298,7 @@ const questions = [
   {
     question: 'A 200 KVA, single phase transformers is installed in parallel with another 200KVA transformer, what is the total KVA output of this new installation?',
     options: ['100 KVA', '200 KVA', '400 KVA', '800 KVA'],
-    answer: 3,
+    answer: 2,
   },
   {
     question: 'Which of the following is one way to change the rotation of a DC shunt motor?',
@@ -1488,7 +1488,7 @@ const questions = [
   {
     question: 'What would you use to install a 45KVA transformer in an attic?',
     options: ['Chain hoist', 'Crane', 'Scissor lift', 'Hoist motor'],
-    answer: 1,
+    answer: 0,
   },
   {
     question: 'Aluminum conductors cant be used in which environment?',
@@ -1683,7 +1683,7 @@ const questions = [
   {
     question: 'An SCR may be turned on by the following methods. Which is the preferred method?',
     options: ['A high rate of change in anode to cathode voltage', 'Anode to cathode voltage exceeding breakover voltage', 'Pulsing the gate with a positive pulse while applying a forward bias.', 'Allowing the SCR to get too hot.'],
-    answer: 1,
+    answer: 2,
   },
   {
     question: 'After splicing a cable, when using heat shrink to reinstate the insulation what is the minimum degree of insulation resistance the heat shrink must provide?',
@@ -1948,7 +1948,7 @@ const questions = [
   {
     question: 'What sort of motor controller is best suited to a motor that starts, stops and reverses quite often?',
     options: ['3 wire controller', '4 wire controller', 'Over the line controller', 'Drum controller'],
-    answer: 1,
+    answer: 3,
   },
   {
     question: 'What switch can be used to control 347V ballast?',
@@ -2868,14 +2868,56 @@ const acronymTerms = [
   { acronym: 'AC', meaning: 'Alternating Current', note: 'Corrente alternada' },
   { acronym: 'AFCI', meaning: 'Arc-Fault Circuit Interrupter', note: 'Proteção contra falha de arco' },
   { acronym: 'AWG', meaning: 'American Wire Gauge', note: 'Sistema de bitola de condutores' },
+  { acronym: 'CCTV', meaning: 'Closed-Circuit Television', note: 'Circuito fechado de televisão' },
   { acronym: 'CEC', meaning: 'Canadian Electrical Code', note: 'Código Elétrico Canadense' },
   { acronym: 'CSA', meaning: 'Canadian Standards Association', note: 'Organização de normas e certificação' },
+  { acronym: 'CT', meaning: 'Current Transformer', note: 'Transformador de corrente' },
   { acronym: 'DC', meaning: 'Direct Current', note: 'Corrente contínua' },
+  { acronym: 'DCLA', meaning: 'Data Communication Link, Class A', note: 'Link de comunicação de dados, Classe A' },
+  { acronym: 'DCS', meaning: 'Distributed Control System', note: 'Sistema de controle distribuído' },
+  { acronym: 'DIP', meaning: 'Dual In-Line Package', note: 'Encapsulamento eletrônico de duas fileiras' },
+  { acronym: 'EEPROM', meaning: 'Electrically Erasable Programmable Read-Only Memory', note: 'Memória somente de leitura apagável eletricamente' },
+  { acronym: 'EMI', meaning: 'Electro-Magnetic Interference', note: 'Interferência eletromagnética' },
+  { acronym: 'EMT', meaning: 'Electrical Metallic Tubing', note: 'Eletroduto metálico elétrico' },
+  { acronym: 'EOL', meaning: 'End of Line', note: 'Fim de linha' },
+  { acronym: 'FAS', meaning: 'Fire Alarm and Signal', note: 'Alarme e sinalização de incêndio' },
+  { acronym: 'FLA', meaning: 'Full Load Amperage', note: 'Corrente em plena carga' },
+  { acronym: 'FS', meaning: 'Float Switch', note: 'Interruptor de boia' },
+  { acronym: 'FTP', meaning: 'File Transfer Protocol', note: 'Protocolo de transferência de arquivos' },
+  { acronym: 'Gb/s', meaning: 'Gigabits per Second', note: 'Gigabits por segundo' },
   { acronym: 'GFCI', meaning: 'Ground-Fault Circuit Interrupter', note: 'Proteção contra fuga à terra' },
+  { acronym: 'HID', meaning: 'High-Intensity Discharge', note: 'Descarga de alta intensidade' },
+  { acronym: 'HMI', meaning: 'Human Machine Interface', note: 'Interface homem-máquina' },
+  { acronym: 'HPS', meaning: 'High Pressure Sodium', note: 'Sódio de alta pressão' },
+  { acronym: 'HTTP', meaning: 'Hyper Text Transfer Protocol', note: 'Protocolo de transferência de hipertexto' },
+  { acronym: 'HVAC', meaning: 'Heating, Ventilation and Air Conditioning', note: 'Aquecimento, ventilação e ar-condicionado' },
+  { acronym: 'I/O', meaning: 'Input/Output', note: 'Entrada/saída' },
+  { acronym: 'IGBT', meaning: 'Insulated Gate Bipolar Transistor', note: 'Transistor bipolar de porta isolada' },
+  { acronym: 'IR', meaning: 'Internal Resistance', note: 'Resistência interna' },
+  { acronym: 'JSR', meaning: 'Jump to Subroutine', note: 'Salto para sub-rotina' },
+  { acronym: 'kAIC', meaning: 'Kiloampere Interrupting Capacity', note: 'Capacidade de interrupção em quiloampères' },
+  { acronym: 'LED', meaning: 'Light-Emitting Diode', note: 'Diodo emissor de luz' },
+  { acronym: 'LRA', meaning: 'Locked Rotor Amperage', note: 'Corrente de rotor bloqueado' },
+  { acronym: 'LRC', meaning: 'Locked Rotor Current', note: 'Corrente de rotor bloqueado' },
+  { acronym: 'LVT', meaning: 'Low Voltage Thermoplastic', note: 'Termoplástico de baixa tensão' },
   { acronym: 'MCC', meaning: 'Motor Control Centre', note: 'Centro de controle de motores' },
+  { acronym: 'MI', meaning: 'Mineral Insulated', note: 'Isolado com material mineral' },
+  { acronym: 'MOV', meaning: 'Metal Oxide Varistor', note: 'Varistor de óxido metálico' },
+  { acronym: 'NC', meaning: 'Normally Closed', note: 'Normalmente fechado' },
   { acronym: 'NMD', meaning: 'Non-Metallic-sheathed cable', note: 'Cabo com revestimento não metálico' },
+  { acronym: 'NO', meaning: 'Normally Open', note: 'Normalmente aberto' },
+  { acronym: 'O/L', meaning: 'Overload', note: 'Sobrecarga' },
+  { acronym: 'PLC', meaning: 'Programmable Logic Controller', note: 'Controlador lógico programável' },
+  { acronym: 'PoE', meaning: 'Power over Ethernet', note: 'Alimentação elétrica via Ethernet' },
   { acronym: 'PVC', meaning: 'Polyvinyl Chloride', note: 'Material usado em eletrodutos' },
+  { acronym: 'RTD', meaning: 'Resistance Temperature Detector', note: 'Detector de temperatura por resistência' },
+  { acronym: 'RTRC', meaning: 'Reinforced Thermosetting Resin Conduit', note: 'Eletroduto de resina termofixa reforçada' },
+  { acronym: 'SCR', meaning: 'Silicon-Controlled Rectifier', note: 'Retificador controlado de silício' },
+  { acronym: 'SF', meaning: 'Service Factor', note: 'Fator de serviço' },
+  { acronym: 'TCP/IP', meaning: 'Transmission Control Protocol/Internet Protocol', note: 'Protocolo de controle de transmissão/protocolo de internet' },
+  { acronym: 'TD', meaning: 'Time Delay', note: 'Atraso de tempo' },
   { acronym: 'TECK90', meaning: 'Thermoset Electrical Cable 90', note: 'Cabo armado para instalações elétricas' },
+  { acronym: 'UPS', meaning: 'Uninterruptible Power Supply', note: 'Fonte de alimentação ininterrupta' },
   { acronym: 'VFD', meaning: 'Variable Frequency Drive', note: 'Inversor de frequência' },
 ];
 
@@ -2905,12 +2947,29 @@ const studyNotesFromDocument = [
     'Shunt motor: Used when speed is more important than torque'
   ].join('\n'),
   [
+  'Tables',
+    'Table 2  = Copper',
+    'Table 4  = Aluminum',
+    'Table 12 = SOOW',
+    'Table 16 = Bonding',
+    'Table 21 = Conduit support spacing',
+    'Table 44 = Three-phase AC motors',
+    'Table 45 = Single-phase AC motors',
+    'Table 50 = Transformers rated over 750V having primary and secondary overcurrent protection',
+    'Table 53 = Minimum cover for direct-buried cables',
+    'Table 56 = Minimum working space around electrical equipment having exposed live parts',
+    'Table 61 = Communications / Pools',
+    'Table 65 = Enclosures Type non-hazardous locations',
+
+  ].join('\n'),
+  [
     'Missing phase on 3Ø motor:Check overcurrent devices first',
     'Motor exposed to moisture:Isolate motor, Test each phase',
     'Contactor humming:Possible low voltage',
     'Replacing contactor coil:Verify voltage, Verify physical size',
     'Manual motor starter:No holding contact',
-
+    'The maximum overcurrent protection allowed for - #10 - 30A / #12 - 20A / #14 - 15A',
+    
   ].join('\n'),
   [
     'TRANSFORMERS',
@@ -2946,7 +3005,8 @@ const studyNotesFromDocument = [
     'Minimum cover = 900 mm',
     'Cellular floors:Maximum conductor size = 1/0',
     'Receptacle box in drywall:Flush with finished surface',
-    'Vertical conduit support spacing:Table 21',
+    'Straight pull - x8',
+    'Angle pull - x6',
     'Underground cable splice: Junction box 1000 mm above grade',
   ].join('\n'),
   [
@@ -2983,13 +3043,13 @@ const studyNotesFromDocument = [
     'Short cycle timer:Prevents excessive refrigerator cycling',
   ].join('\n'),
   [
-    'SECTION — PLC / CONTROLS',
+    'PLC / CONTROLS',
     'PLC:Do not tie input and output together',
     'Photocell:Adjust sensitivity',
     'VFD:Constant torque by maintaining V/F ratio',
   ].join('\n'),
   [
-    'SECTION — SAFETY / OHS',
+    'SAFETY / OHS',
     'Extension ladder:900 mm above roof line',
     'MCC exposed live parts:2.2 m headroom',
     'Basement switch:Top of stairs',
@@ -2998,6 +3058,7 @@ const studyNotesFromDocument = [
     'Crane bucket:High visibility vest',
     'Lockout (simulado):Machine in operation and broken',
     'Ground fault interrupter:Test monthly',
+    'Ladder above roof = 1 m (3 ft)'
   ].join('\n'),
   [
     'ELECTRICAL INSTALLATION',
@@ -3014,18 +3075,19 @@ const studyNotesFromDocument = [
   ].join('\n'),
   [
     'GAS GROUPS',
-    'IIA',
-    'Propane',
-    'Gasoline vapours',
-    'Natural gas',
-    'IIB',
-    'Ethylene',
-    'IIC',
-    'Hydrogen',
-    'Acetylene',
+    'IIA - Propane, Gasoline vapours, Natural gas',
+    'IIB -Ethylene',
+    'IIC - Hydrogen, Acetylene',
+    'Zone 0 - Explosive gas present continuously or for long periods',
+    'Zone 1 - Explosive gas likely to occur in normal operation',
+    'Zone 2 - Explosive gas not likely to occur in normal operation',
+    'Zone 20 - Location in which an explosive dust atmosphere in the form of a cloud dust in air present continuously, or for long periods, or frequently',
+    'Zone 21 - Location in which an explosive dust atmosphere in the form of a cloud dust in air is likely to occur in normal operation',
+    'Zone 22 - Location in which an explosive dust atmosphere in the form of a cloud dust in air is not likely to occur in normal operation, but if does occur, will persist for a short period only',
+    
   ].join('\n'),
   [
-    'SECTION — MISCELLANEOUS',
+    'MISCELLANEOUS',
     'Plumbing riser diagrams:Mechanical drawings',
     'Single neon sign transformer:30 A',
     'Auxiliary gutters:20%',
@@ -3039,7 +3101,6 @@ const studyNotesFromDocument = [
 
 const defaultNotes = [
   'I will pass the Red Seal 2026',
-  'CEC realmente usa working space e headroom como conceitos diferentes na Rule 2-308: 1 m de working space com secure footing, enquanto 2,2 m é o headroom em determinadas condições.',
   [
     'SECTION 6 — SERVICES',
     'Highway clearance = 5.5 m',
@@ -3121,24 +3182,11 @@ const defaultNotes = [
     'Conductive fibre optic cable = Class 2 conductors',
   ].join('\n'),
   [
-    'SAFETY',
-    'Ladder above roof = 1 m (3 ft)',
-  ].join('\n'),
-  [
     'Section 32 — Fire Alarms System and fire pumps',
     'Fire pump conductors = 125%',
     'Alert stage = 5 minutes action',
   ].join('\n'),
-  [
-    'IMPORTANT TABLES',
-    'Table 2  = Copper',
-    'Table 4  = Aluminum',
-    'Table 12 = SOOW',
-    'Table 16 = Bonding',
-    'Table 44 = Three-phase AC motors',
-    'Table 45 = Single-phase AC motors',
-    'Table 61 = Communications / Pools',
-  ].join('\n'),
+
   ...studyNotesFromDocument,
 ];
 
