@@ -458,7 +458,7 @@ const questions = [
   {
     question: 'A 347/600V, 3-phase motor is to be protected by an overload relay. How many overload devices are required?',
     options: ['1', '2', '3', 'Overload protection is not required in this situation'],
-    answer: 0,
+    answer: 2,
   },
   {
     question: 'If a DC motor is supplied from a full-wave bridge rectifier and one of the diodes becomes defective, the most likely result to the motor will be:',
@@ -513,7 +513,7 @@ const questions = [
   {
     question: 'What is the location of an emergency pull cord for a nurse call system?',
     options: ['washrooms', 'toilets', 'showers', 'all of the above'],
-    answer: 0,
+    answer: 3,
   },
   {
     question: 'Who controls Fire Alarm System?',
@@ -788,7 +788,7 @@ const questions = [
   {
     question: 'On what type of drawing would you find information on the connections of PLC components?',
     options: ['Riser.', 'Layout', 'Schematic', 'Logic'],
-    answer: 0,
+    answer: 2,
   },
   {
     question: 'All non-current carrying metal parts of electrical equipment in the fire alarm system must be bonded to ground in accordance with what section?',
@@ -1168,7 +1168,7 @@ const questions = [
   {
     question: 'A three phase motor is missing one phase. What should the electrician check first?',
     options: ['Over current devices.', 'Overload devices.', 'Continuity of windings.', 'Bonding connection.'],
-    answer: 1,
+    answer: 0,
   },
   {
     question: 'When testing PLC inputs and outputs, what procedure is followed?',
@@ -2720,42 +2720,7 @@ const questions = [
     options: ['Heating contactor closes, then air flow switch closes', 'Air flow switch closes before heating contactor closes', 'Air flow switch opens before heating contactor closes', 'Heating contactor closes, then air flow switch opens'],
     answer: 1,
   },
-  {
-    question: '',
-    options: ['', '', '', ''],
-    answer: 1,
-  },
-  {
-    question: '',
-    options: ['', '', '', ''],
-    answer: 1,
-  },
-  {
-    question: '',
-    options: ['', '', '', ''],
-    answer: 1,
-  },
-  {
-    question: '',
-    options: ['', '', '', ''],
-    answer: 1,
-  },
-  {
-    question: '',
-    options: ['', '', '', ''],
-    answer: 1,
-  },
-  {
-    question: '',
-    options: ['', '', '', ''],
-    answer: 1,
-  },
-  {
-    question: '',
-    options: ['', '', '', ''],
-    answer: 1,
-  },
-
+  
 
   ]
 
@@ -2950,9 +2915,12 @@ const studyNotesFromDocument = [
   'Tables',
     'Table 2  = Copper',
     'Table 4  = Aluminum',
-    'Table 12 = SOOW',
+    'Table 12 = Ampacity of flexbible insulated copper conductor cord and equipment wire',
+    'Table 12A = Ampacities for portable insulated copper conductor power cables',
     'Table 16 = Bonding',
     'Table 21 = Conduit support spacing',
+    'Table 36A = Ampacity for aluminum conductor neutral supported cables',
+    'Table 36B = Ampacity for copper conductor neutral supported cables',
     'Table 44 = Three-phase AC motors',
     'Table 45 = Single-phase AC motors',
     'Table 50 = Transformers rated over 750V having primary and secondary overcurrent protection',
@@ -3156,6 +3124,7 @@ const defaultNotes = [
     'Table 29 = Rating or Setting of overcurrent devices for the protection of motor branch circuits',
     'Table 44 = Three-phase AC motors',
     'Table 45 = Single-phase AC motors',
+    'D.P -> Drip proof',
   ].join('\n'),
   [
     'SECTION 30 — LIGHTING',
