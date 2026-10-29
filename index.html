@@ -3,18 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz Red Seal</title>
+    <title>Red Seal Industrial Electrician Study Dashboard</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main class="quiz-container">
       <div class="quiz-card">
-        <section id="cec-setup-screen" class="setup-screen">
-          <div class="setup-header">
+        <section id="home-screen" class="home-screen">
+          <div class="home-header">
+            <p class="eyebrow">Red Seal Industrial Electrician</p>
+            <h1>Personal Study Dashboard</h1>
+            <p class="home-intro">Choose a study area to continue.</p>
+          </div>
+          <nav class="dashboard-grid" aria-label="Study areas">
+            <button class="dashboard-card" type="button" data-open-screen="cec-setup-screen">
+              <span class="dashboard-card-title">QUIZ &amp; EXAMS</span>
+              <span class="dashboard-card-description">Practice questions and exam sessions</span>
+            </button>
+            <button class="dashboard-card" type="button" data-open-screen="notes-screen">
+              <span class="dashboard-card-title">NOTES</span>
+              <span class="dashboard-card-description">Browse and search your study notes</span>
+            </button>
+            <button class="dashboard-card" type="button" data-open-screen="formulas-screen">
+              <span class="dashboard-card-title">FORMULAS</span>
+              <span class="dashboard-card-description">Organize formulas by category</span>
+            </button>
+            <button class="dashboard-card" type="button" data-open-screen="vocabulary-screen">
+              <span class="dashboard-card-title">VOCABULARY</span>
+              <span class="dashboard-card-description">Review technical terms</span>
+            </button>
+            <button class="dashboard-card" type="button" data-open-screen="acronyms-screen">
+              <span class="dashboard-card-title">ACRONYMS</span>
+              <span class="dashboard-card-description">Review acronyms and abbreviations</span>
+            </button>
+          </nav>
+        </section>
+
+        <section id="cec-setup-screen" class="hidden" hidden>
+          <div class="notes-header">
             <div>
-              <p class="eyebrow">Quiz Red Seal</p>
+              <p class="eyebrow">Quiz &amp; Exams</p>
               <h1>Select Options</h1>
             </div>
+            <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
           </div>
 
           <div class="setup-content">
@@ -35,18 +66,6 @@
                 <div class="setup-row">
                   <button class="count-btn" type="button" data-question-count="all">All questions</button>
                 </div>
-
-                <div class="utility-row">
-                  <button id="notes-toggle-btn" class="notes-toggle-btn" type="button" aria-expanded="false" aria-controls="notes-panel">
-                    Notes
-                  </button>
-                  <button id="vocabulary-btn" class="vocabulary-btn" type="button">
-                    Vocabulary
-                  </button>
-                  <button id="acronyms-btn" class="acronyms-btn" type="button">
-                    Acronyms and Abbreviations
-                  </button>
-                </div>
               </div>
             </div>
 
@@ -58,22 +77,71 @@
 
         <section id="notes-screen" class="notes-screen hidden" hidden>
           <div class="notes-header">
-            <h1>Notes</h1>
-            <button id="back-to-setup-btn" class="secondary-btn" type="button">Back</button>
+            <h1>NOTES</h1>
+            <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
           </div>
 
           <div id="notes-panel" class="notes-panel">
-            <div id="notes-list" class="notes-list" aria-live="polite"></div>
-            <label for="note-input">Write a note</label>
-            <textarea id="note-input" rows="3" placeholder="Ex.: review electrical installations"></textarea>
-            <button id="save-note-btn" class="primary-btn" type="button">Save note</button>
+            <div id="notes-index-view">
+              <label class="search-label" for="notes-search">Search all notes</label>
+              <input id="notes-search" class="content-search" type="search" placeholder="Search notes..." autocomplete="off">
+              <div id="notes-section-list" class="resource-grid" aria-live="polite"></div>
+              <div class="resource-actions">
+                <button id="all-sections-btn" class="secondary-btn" type="button">ALL SECTIONS</button>
+                <button id="misc-notes-btn" class="secondary-btn" type="button">MISCELLANEOUS</button>
+              </div>
+            </div>
+            <div id="notes-detail-view" class="hidden" hidden>
+              <div class="notes-header detail-header">
+                <h2 id="notes-detail-title"></h2>
+                <div class="resource-actions">
+                  <button id="back-to-sections-btn" class="secondary-btn" type="button">BACK TO SECTIONS</button>
+                  <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
+                </div>
+              </div>
+              <label class="search-label" for="section-notes-search">Search this section</label>
+              <input id="section-notes-search" class="content-search" type="search" placeholder="Search this section..." autocomplete="off">
+              <div id="notes-list" class="notes-list" aria-live="polite"></div>
+            </div>
+            <div class="personal-note-form">
+              <label for="note-input">Add a personal note</label>
+              <textarea id="note-input" rows="3" placeholder="Write a study note..."></textarea>
+              <button id="save-note-btn" class="primary-btn" type="button">Save note</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="formulas-screen" class="content-screen hidden" hidden>
+          <div class="notes-header">
+            <h1>FORMULAS</h1>
+            <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
+          </div>
+          <div id="formulas-index-view">
+            <label class="search-label" for="formulas-search">Search formulas</label>
+            <input id="formulas-search" class="content-search" type="search" placeholder="Search names, equations, descriptions, variables, or tags..." autocomplete="off">
+            <div id="formula-category-list" class="resource-grid" aria-live="polite"></div>
+            <div class="resource-actions">
+              <button id="all-formulas-btn" class="secondary-btn" type="button">ALL FORMULAS</button>
+            </div>
+          </div>
+          <div id="formulas-detail-view" class="hidden" hidden>
+            <div class="notes-header detail-header">
+              <h2 id="formulas-detail-title"></h2>
+              <div class="resource-actions">
+                <button id="back-to-categories-btn" class="secondary-btn" type="button">BACK TO CATEGORIES</button>
+                <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
+              </div>
+            </div>
+            <label class="search-label" for="category-formulas-search">Search formulas</label>
+            <input id="category-formulas-search" class="content-search" type="search" placeholder="Search formulas..." autocomplete="off">
+            <div id="formula-list" class="formula-list" aria-live="polite"></div>
           </div>
         </section>
 
         <section id="vocabulary-screen" class="vocabulary-screen hidden" hidden>
           <div class="notes-header">
-            <h1>Vocabulary</h1>
-            <button id="back-to-setup-from-vocabulary-btn" class="secondary-btn" type="button">Back</button>
+            <h1>VOCABULARY</h1>
+            <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
           </div>
 
           <div class="vocabulary-panel">
@@ -83,8 +151,8 @@
 
         <section id="acronyms-screen" class="vocabulary-screen hidden" hidden>
           <div class="notes-header">
-            <h1>Acronyms and Abbreviations</h1>
-            <button id="back-to-setup-from-acronyms-btn" class="secondary-btn" type="button">Back</button>
+            <h1>ACRONYMS</h1>
+            <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
           </div>
 
           <div class="vocabulary-panel">
@@ -109,6 +177,6 @@
       </div>
     </main>
 
-    <script src="script.js?v=4"></script>
+    <script src="script.js?v=5"></script>
   </body>
 </html>

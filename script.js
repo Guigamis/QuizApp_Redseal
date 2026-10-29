@@ -918,7 +918,7 @@ const questions = [
   {
     question: 'The main purpose served by a heat anticipator is:',
     options: ['To safely stop current flow to a motor before it becomes overheated.', 'To shut down fuel flow to a furnace before it reaches a pre-set temperature.', 'To prevent transformer overheating', 'To allow adjustment of the differential'],
-    answer: 3,
+    answer: 1,
   },
   {
     question: 'When is it safe to switch to parallel alternators while using the three light synchronization method?',
@@ -2173,7 +2173,7 @@ const questions = [
   {
     question: 'How is noise mitigated on the supply side of a VFD?',
     options: ['by increasing the rating of the line reactor', 'by increasing the clamping voltage on the MOV', 'by increasing the voltage threshold of the SCR', 'by increasing the acceleration ramp in the drive'],
-    answer: 1,
+    answer: 0,
   },
   {
     question: 'How many overload devices are required to protect a 1/3 HP 230V single phase motor?',
@@ -2358,7 +2358,7 @@ const questions = [
   {
     question: 'Which anchor is used to attach a surface mounted electrical panel to the wall?',
     options: ['drop-in insert', 'toggle bolt', 'Drywall fastener', 'lag bolt'],
-    answer: 1,
+    answer: 3,
   },
   {
     question: 'Which authority presides over the requirements of exits signs?',
@@ -2726,8 +2726,11 @@ const questions = [
 
 
   
+const homeScreen = document.getElementById('home-screen');
+const appScreens = [...document.querySelectorAll('main > .quiz-card > section')];
 const setupScreen = document.getElementById('cec-setup-screen');
 const notesScreen = document.getElementById('notes-screen');
+const formulasScreen = document.getElementById('formulas-screen');
 const vocabularyScreen = document.getElementById('vocabulary-screen');
 const acronymsScreen = document.getElementById('acronyms-screen');
 const quizScreen = document.getElementById('quiz-screen');
@@ -2739,16 +2742,23 @@ const answersEl = document.getElementById('answers');
 const nextBtn = document.getElementById('next-btn');
 const previousBtn = document.getElementById('previous-btn');
 const resetBtn = document.getElementById('reset-btn');
-const notesToggleBtn = document.getElementById('notes-toggle-btn');
-const vocabularyBtn = document.getElementById('vocabulary-btn');
-const acronymsBtn = document.getElementById('acronyms-btn');
-const backToSetupBtn = document.getElementById('back-to-setup-btn');
-const backToSetupFromVocabularyBtn = document.getElementById('back-to-setup-from-vocabulary-btn');
-const backToSetupFromAcronymsBtn = document.getElementById('back-to-setup-from-acronyms-btn');
-const notesPanel = document.getElementById('notes-panel');
+const notesIndexView = document.getElementById('notes-index-view');
+const notesDetailView = document.getElementById('notes-detail-view');
+const notesSectionList = document.getElementById('notes-section-list');
+const notesDetailTitle = document.getElementById('notes-detail-title');
+const notesSearch = document.getElementById('notes-search');
+const sectionNotesSearch = document.getElementById('section-notes-search');
+const formulasIndexView = document.getElementById('formulas-index-view');
+const formulasDetailView = document.getElementById('formulas-detail-view');
+const formulaCategoryList = document.getElementById('formula-category-list');
+const formulaList = document.getElementById('formula-list');
+const formulasDetailTitle = document.getElementById('formulas-detail-title');
+const formulasSearch = document.getElementById('formulas-search');
+const categoryFormulasSearch = document.getElementById('category-formulas-search');
 const noteInput = document.getElementById('note-input');
 const saveNoteBtn = document.getElementById('save-note-btn');
 const notesList = document.getElementById('notes-list');
+const personalNoteForm = document.querySelector('.personal-note-form');
 const vocabularyList = document.getElementById('vocabulary-list');
 const acronymsList = document.getElementById('acronyms-list');
 
@@ -2894,7 +2904,15 @@ let quizFinished = false;
 let selectedSection = '';
 let answerSelections = [];
 
-const studyNotesFromDocument = [
+/**
+ * @typedef {Object} StudyNote
+ * @property {string} [id]
+ * @property {string} [section]
+ * @property {string} text
+ * @property {string[]} [relatedFormulaIds]
+ */
+/** @type {Array<string | StudyNote>} */
+const builtInNoteEntries = [
   [
     'Study Notes - Theory',
     'Vf = VL / √3',
@@ -3067,7 +3085,7 @@ const studyNotesFromDocument = [
   ].join('\n'),
 ];
 
-const defaultNotes = [
+builtInNoteEntries.push(...[
   'I will pass the Red Seal 2026',
   [
     'SECTION 6 — SERVICES',
@@ -3155,13 +3173,216 @@ const defaultNotes = [
     'Fire pump conductors = 125%',
     'Alert stage = 5 minutes action',
   ].join('\n'),
+[
+    'Study Notes - Theory',
+    'Vf = VL / √3',
+    'Full-wave rectifier:',
+    'VDC ≈ VAC × 0.9',
+    'Impedance triangle: Z = √(R² + X²)',
+    'Three transformers in delta, Remove one transformer = Remaining capacity = 57.7%',
+    'Fault current at transformer secondary: Isc = FLC / Zpu',
+    '4–20 mA: Span = 16 mA 50% = 12 mA',
+    'Lamp life increases with lower voltage.',
+    'Centrifugal switch - Closed when motor stopped',
+    'Opens at approximately 75–80% speed',
+    'Opens too early → motor may not start',
+    'Stuck closed → start winding remains energized and may burn',
+    'Shunt motor: Used when speed is more important than torque'
+  ].join('\n'),
+  [
+  'Tables',
+    'Table 2  = Copper',
+    'Table 4  = Aluminum',
+    'Table 12 = Ampacity of flexbible insulated copper conductor cord and equipment wire',
+    'Table 12A = Ampacities for portable insulated copper conductor power cables',
+    'Table 16 = Bonding',
+    'Table 21 = Conduit support spacing',
+    'Table 36A = Ampacity for aluminum conductor neutral supported cables',
+    'Table 36B = Ampacity for copper conductor neutral supported cables',
+    'Table 44 = Three-phase AC motors',
+    'Table 45 = Single-phase AC motors',
+    'Table 50 = Transformers rated over 750V having primary and secondary overcurrent protection',
+    'Table 53 = Minimum cover for direct-buried cables',
+    'Table 56 = Minimum working space around electrical equipment having exposed live parts',
+    'Table 61 = Communications / Pools',
+    'Table 65 = Enclosures Type non-hazardous locations',
 
-  ...studyNotesFromDocument,
+  ].join('\n'),
+  [
+    'Missing phase on 3Ø motor:Check overcurrent devices first',
+    'Motor exposed to moisture:Isolate motor, Test each phase',
+    'Contactor humming:Possible low voltage',
+    'Replacing contactor coil:Verify voltage, Verify physical size',
+    'Manual motor starter:No holding contact',
+    'The maximum overcurrent protection allowed for - #10 - 30A / #12 - 20A / #14 - 15A',
+    
+  ].join('\n'),
+  [
+    'TRANSFORMERS',
+    'Transformer: Rule 26-240',
+    '45 kVA transformer installed in attic:Use chain hoist',
+    'Secondary fault current:Based on transformer impedance',
+  ].join('\n'),
+  [
+    'FIRE ALARM',
+    'Class B fire alarm circuit',
+    'Fire alarm reversed polarity:Trouble signal activates',
+    'Nurse emergency call:Reset at nurse call station',
+    'Stage 2 fire alarm:Illuminated light, System in alert stage, Action required within 5 minutes',
+    'Smallest conductor in race alarm raceway:#19 AWG',
+  ].join('\n'),
+  [
+    'EMERGENCY SYSTEMS',
+    'Storage batteries:Maintain 91%',
+    'Emergency batteries:Keep maintained, Keep fully charged',
+    'Emergency supply:30 minutes',
+    'Emergency lights:Test monthly',
+  ].join('\n'),
+  [
+    'SECTION 10 – GROUNDING & BONDING',
+    'High-voltage fence fabric:Bond in 2 locations',
+    'Outdoor pad-mounted transformer:Minimum 4 rods',
+    'CAD (Exothermic) Welding Components:Bonding cable, Welding mold, Welding compound, Ignition compound -> Last material on top',
+  ].join('\n'),
+  [
+    'SECTION 12 – WIRING METHODS',
+    'Minimum conduit size for service conductor:21 mm (¾")',
+    'NMSC under dwelling driveway:600 V',
+    'Minimum cover = 900 mm',
+    'Cellular floors:Maximum conductor size = 1/0',
+    'Receptacle box in drywall:Flush with finished surface',
+    'Straight pull - x8',
+    'Angle pull - x6',
+    'Underground cable splice: Junction box 1000 mm above grade',
+  ].join('\n'),
+  [
+    'SECTION 18 / 20 – HAZARDOUS LOCATIONS',
+    'Gasoline dispenser nozzle boot:Class I Zone 0',
+    'Commercial garage:Area up to 450 mm above floor = Class I Zone 2',
+
+  ].join('\n'),
+  [
+    'SECTION 26',
+    'Service location:Must comply with supply authority',
+    'Meter equipment',
+    'Meter mounting device',
+    'Supply side service box',
+    '200 A',
+  ].join('\n'),
+  [
+    'SECTION 30 – LIGHTING',
+    'HID = High Intensity Discharge',
+    'Maximum breaker feeding HID lighting circuit:40 A',
+    'Incandescent:Least efficient light source',
+    'Luminaire beam pattern:Change reflector',
+    'Exit luminaire:Circuit used for no other purpose',
+    'Closet luminaire:Acceptable above doorway on wall',
+    'School luminaires:Protected by metal reflectors',
+    'Enclosed stairway lighting:Review 5 m note',
+  ].join('\n'),
+  [
+    'SECTION 60 – HEATING / HVAC',
+    'Heating cable under driveway:50 mm',
+    'Heat anticipator:Heats thermostat element, Causes cooling to start sooner',
+    'Furnace call for heat sequence:Ignition, Burner heats, Fan starts',
+    'Zone valve:Controls hot water system connected to boiler',
+    'Short cycle timer:Prevents excessive refrigerator cycling',
+  ].join('\n'),
+  [
+    'PLC / CONTROLS',
+    'PLC:Do not tie input and output together',
+    'Photocell:Adjust sensitivity',
+    'VFD:Constant torque by maintaining V/F ratio',
+  ].join('\n'),
+  [
+    'SAFETY / OHS',
+    'Extension ladder:900 mm above roof line',
+    'MCC exposed live parts:2.2 m headroom',
+    'Basement switch:Top of stairs',
+    'WHMIS:Training required, Access to SDS/MSDS',
+    'Crane signal to lower boom:Arm extended, Fingers closed, Thumb down',
+    'Crane bucket:High visibility vest',
+    'Lockout (simulado):Machine in operation and broken',
+    'Ground fault interrupter:Test monthly',
+    'Ladder above roof = 1 m (3 ft)'
+  ].join('\n'),
+  [
+    'ELECTRICAL INSTALLATION',
+    'Rough-in starts:After walls and roof are weather-tight',
+    'Generator grounding:Supply end',
+    'Lightning switch:Connected to grounding conductor',
+    'Multiple power sources to motor controller:Single disconnect means required',
+  ].join('\n'),
+  [
+    'COMMUNICATIONS',
+    'Fibre optic cable:Permitted with Class 2 conductors',
+    'Separation between communication cables and other systems:300 mm',
+    'Class 2 conductor separation:Review 600 mm confirmed in Anotações1',
+  ].join('\n'),
+  [
+    'GAS GROUPS',
+    'IIA - Propane, Gasoline vapours, Natural gas',
+    'IIB -Ethylene',
+    'IIC - Hydrogen, Acetylene',
+    'Zone 0 - Explosive gas present continuously or for long periods',
+    'Zone 1 - Explosive gas likely to occur in normal operation',
+    'Zone 2 - Explosive gas not likely to occur in normal operation',
+    'Zone 20 - Location in which an explosive dust atmosphere in the form of a cloud dust in air present continuously, or for long periods, or frequently',
+    'Zone 21 - Location in which an explosive dust atmosphere in the form of a cloud dust in air is likely to occur in normal operation',
+    'Zone 22 - Location in which an explosive dust atmosphere in the form of a cloud dust in air is not likely to occur in normal operation, but if does occur, will persist for a short period only',
+    
+  ].join('\n'),
+  [
+    'MISCELLANEOUS',
+    'Plumbing riser diagrams:Mechanical drawings',
+    'Single neon sign transformer:30 A',
+    'Auxiliary gutters:20%',
+    'Magnetic circuit breaker:Best in extreme temperatures',
+    'Delta system colours:Black, Red, Blue',
+    'Punch down tool:Terminates conductor, Cuts conductor',
+    'Control exit luminaire:Dedicated circuit',
+    'Acceptable luminaire location in clothes closet:Wall above doorway',
+  ].join('\n'),
+
+
+]);
+
+
+
+const formulaCategories = [
+  'Electrical Power',
+  "Ohm's Law",
+  'Resistance',
+  'AC Circuits',
+  'Transformers',
+  'Motors',
+  'Power Factor',
+  'Three-Phase Systems',
+  'Other Formulas',
 ];
-
-
-
-let notes = dedupeNotes(JSON.parse(localStorage.getItem('redSealNotes') || 'null') || defaultNotes);
+/**
+ * @typedef {Object} StudyFormula
+ * @property {string} id
+ * @property {string} name
+ * @property {string} equation
+ * @property {string} category
+ * @property {string} [description]
+ * @property {Record<string, string>} [variables]
+ * @property {Record<string, string>} [units]
+ * @property {string} [conditions]
+ * @property {string} [whenToUse]
+ * @property {string} [workedExample]
+ * @property {string} [notes]
+ * @property {string[]} [tags]
+ * @property {string} [relatedCecSection]
+ * @property {string[]} [relatedNoteIds]
+ */
+/** @type {StudyFormula[]} */
+const formulas = [];
+const savedNotes = JSON.parse(localStorage.getItem('redSealNotes') || '[]');
+let notes = dedupeNotes([...builtInNoteEntries, ...(Array.isArray(savedNotes) ? savedNotes : [])]);
+let activeNotesSection = null;
+let activeFormulaCategory = null;
 
 const sectionNames = [...new Set(questions.map((question) => question.section || 'General CEC 2024'))];
 selectedSection = sectionNames[0];
@@ -3251,19 +3472,43 @@ function renderAcronyms() {
 function normalizeNoteEntry(note) {
   const rawText = typeof note === 'string' ? note : note?.text || '';
   const explicitSection = typeof note === 'object' && note && note.section ? String(note.section).trim() : '';
+  const id = typeof note === 'object' && note && note.id ? String(note.id).trim() : '';
+  const relatedFormulaIds = typeof note === 'object' && note && Array.isArray(note.relatedFormulaIds)
+    ? note.relatedFormulaIds.map(String)
+    : [];
   const lines = rawText
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
 
-  const sectionLine = explicitSection || lines.find((line) => /^SECTION\s+/i.test(line) || /^SEÇÃO\s+/i.test(line)) || selectedSection || 'Notes';
-  const bodyText = explicitSection ? rawText.trim() : sectionLine && rawText.includes(sectionLine)
-    ? lines.filter((line) => line !== sectionLine).join('\n')
-    : rawText.trim();
+  const sectionLine = explicitSection || lines.find((line) => /^(?:SECTION|SEÇÃO)\s+\d+/i.test(line));
+  const section = sectionLine || 'MISCELLANEOUS';
+  const hasMiscellaneousHeading = !sectionLine && lines[0]?.toUpperCase() === 'MISCELLANEOUS';
+  let text = rawText.trim();
+  if (!explicitSection && sectionLine) {
+    text = lines.filter((line) => line !== sectionLine).join('\n').trim();
+  } else if (hasMiscellaneousHeading) {
+    text = lines.slice(1).join('\n').trim();
+  }
 
   return {
-    section: sectionLine,
-    text: bodyText || rawText.trim(),
+    section,
+    text: text || rawText.trim(),
+    id,
+    relatedFormulaIds,
+  };
+}
+
+function getNoteSectionInfo(section) {
+  const match = section.match(/(?:SECTION|SEÇÃO)\s+(\d+)/i);
+  if (!match) {
+    return { key: 'miscellaneous', number: null, label: 'MISCELLANEOUS' };
+  }
+
+  return {
+    key: `section-${Number(match[1])}`,
+    number: Number(match[1]),
+    label: section,
   };
 }
 
@@ -3273,7 +3518,8 @@ function dedupeNotes(list) {
 
   (Array.isArray(list) ? list : []).forEach((note) => {
     const normalized = normalizeNoteEntry(note);
-    const key = `${normalized.section}::${normalized.text}`.replace(/\s+/g, ' ').trim().toLowerCase();
+    const sectionInfo = getNoteSectionInfo(normalized.section);
+    const key = `${sectionInfo.key}::${normalized.text}`.replace(/\s+/g, ' ').trim().toLowerCase();
 
     if (!normalized.text || seen.has(key)) {
       return;
@@ -3283,6 +3529,8 @@ function dedupeNotes(list) {
     uniqueNotes.push({
       section: normalized.section,
       text: normalized.text,
+      ...(normalized.id ? { id: normalized.id } : {}),
+      ...(normalized.relatedFormulaIds.length ? { relatedFormulaIds: normalized.relatedFormulaIds } : {}),
     });
   });
 
@@ -3295,143 +3543,425 @@ function addUniqueNote(entry) {
     return;
   }
 
-  const key = `${normalized.section}::${normalized.text}`.replace(/\s+/g, ' ').trim().toLowerCase();
+  const sectionInfo = getNoteSectionInfo(normalized.section);
+  const key = `${sectionInfo.key}::${normalized.text}`.replace(/\s+/g, ' ').trim().toLowerCase();
   const alreadyExists = notes.some((current) => {
     const currentNormalized = normalizeNoteEntry(current);
-    return `${currentNormalized.section}::${currentNormalized.text}`.replace(/\s+/g, ' ').trim().toLowerCase() === key;
+    const currentSectionInfo = getNoteSectionInfo(currentNormalized.section);
+    return `${currentSectionInfo.key}::${currentNormalized.text}`.replace(/\s+/g, ' ').trim().toLowerCase() === key;
   });
 
   if (!alreadyExists) {
     notes.push({
       section: normalized.section,
       text: normalized.text,
+      ...(normalized.id ? { id: normalized.id } : {}),
+      ...(normalized.relatedFormulaIds.length ? { relatedFormulaIds: normalized.relatedFormulaIds } : {}),
     });
   }
 }
 
-function renderNotes() {
-  notesList.innerHTML = '';
-
-  if (notes.length === 0) {
-    notesList.innerHTML = '<p class="empty-notes">No notes yet.</p>';
-    return;
-  }
-
+function getNoteGroups() {
   const groupedNotes = new Map();
 
   notes.forEach((note) => {
     const normalized = normalizeNoteEntry(note);
-    const key = normalized.section;
+    const sectionInfo = getNoteSectionInfo(normalized.section);
 
-    if (!groupedNotes.has(key)) {
-      groupedNotes.set(key, []);
+    if (!groupedNotes.has(sectionInfo.key)) {
+      groupedNotes.set(sectionInfo.key, {
+        ...sectionInfo,
+        label: sectionInfo.number === null ? sectionInfo.label : normalized.section,
+        entries: [],
+      });
     }
 
-    groupedNotes.get(key).push({
-      text: normalized.text,
-    });
+    const group = groupedNotes.get(sectionInfo.key);
+    if (sectionInfo.number !== null && normalized.section.length > group.label.length) {
+      group.label = normalized.section;
+    }
+    group.entries.push(normalized);
   });
 
-  groupedNotes.forEach((entries, sectionName) => {
+  return [...groupedNotes.values()].sort((first, second) => {
+    if (first.number === null) return second.number === null ? 0 : 1;
+    if (second.number === null) return -1;
+    return first.number - second.number;
+  });
+}
+
+function matchesSearch(text, query) {
+  return String(text || '').toLocaleLowerCase().includes(query.trim().toLocaleLowerCase());
+}
+
+function createEmptyState(message) {
+  const emptyState = document.createElement('p');
+  emptyState.className = 'empty-state';
+  emptyState.textContent = message;
+  return emptyState;
+}
+
+function renderNoteSectionList(query = '') {
+  notesSectionList.replaceChildren();
+  const filteredGroups = getNoteGroups().filter((group) => {
+    const matches = !query
+      || matchesSearch(group.label, query)
+      || group.entries.some((entry) => matchesSearch(
+        `${entry.id} ${entry.text} ${entry.relatedFormulaIds.join(' ')}`,
+        query,
+      ));
+    return matches && (group.number !== null || Boolean(query));
+  });
+
+  if (!filteredGroups.length) {
+    notesSectionList.append(createEmptyState('No notes match your search.'));
+    return;
+  }
+
+  filteredGroups.forEach((group) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'resource-card';
+    const title = document.createElement('span');
+    title.className = 'resource-card-title';
+    title.textContent = group.label;
+    const description = document.createElement('span');
+    description.className = 'resource-card-description';
+    description.textContent = `${group.entries.length} ${group.entries.length === 1 ? 'note' : 'notes'}`;
+    button.append(title, description);
+    button.addEventListener('click', () => openNotesDetail(group.key, query));
+    notesSectionList.appendChild(button);
+  });
+}
+
+function renderNotes() {
+  notesList.replaceChildren();
+  const query = sectionNotesSearch.value.trim();
+  const groups = getNoteGroups().filter((group) => {
+    if (activeNotesSection === 'all-sections') return group.number !== null;
+    if (activeNotesSection === 'miscellaneous') return group.key === 'miscellaneous';
+    return group.key === activeNotesSection;
+  });
+  let visibleCount = 0;
+
+  groups.forEach((group) => {
+    const entries = group.entries.filter((entry) => (
+      !query || matchesSearch(
+        `${entry.section} ${entry.id} ${entry.text} ${entry.relatedFormulaIds.join(' ')}`,
+        query,
+      )
+    ));
+    if (!entries.length) return;
+
     const sectionGroup = document.createElement('div');
     sectionGroup.className = 'note-section-group';
-
     const sectionTitle = document.createElement('h3');
     sectionTitle.className = 'note-section-title';
-    sectionTitle.textContent = sectionName;
+    sectionTitle.textContent = group.label;
     sectionGroup.appendChild(sectionTitle);
 
-    entries.forEach(({ text }) => {
+    entries.forEach((entry) => {
       const noteItem = document.createElement('div');
       noteItem.className = 'note-item';
-
       const noteText = document.createElement('span');
-      noteText.textContent = text;
-
-      noteItem.append(noteText);
+      noteText.textContent = entry.text;
+      noteItem.appendChild(noteText);
+      if (entry.relatedFormulaIds.length) {
+        const references = document.createElement('div');
+        references.className = 'note-references';
+        entry.relatedFormulaIds.forEach((formulaId) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'text-link-btn';
+          button.textContent = `Related formula: ${formulaId}`;
+          button.addEventListener('click', () => {
+            showScreen(formulasScreen);
+            openFormulaCategory('all-formulas', formulaId);
+          });
+          references.appendChild(button);
+        });
+        noteItem.appendChild(references);
+      }
       sectionGroup.appendChild(noteItem);
+      visibleCount += 1;
     });
 
     notesList.appendChild(sectionGroup);
   });
+
+  if (visibleCount === 0) {
+    notesList.append(createEmptyState(query ? 'No notes match your search.' : 'No notes are available in this view.'));
+  }
 }
 
-function showSetupScreen() {
-  setupScreen.hidden = false;
-  notesScreen.hidden = true;
-  vocabularyScreen.hidden = true;
-  acronymsScreen.hidden = true;
-  quizScreen.hidden = true;
-  setupScreen.classList.remove('hidden');
-  notesScreen.classList.add('hidden');
-  vocabularyScreen.classList.add('hidden');
-  acronymsScreen.classList.add('hidden');
-  quizScreen.classList.add('hidden');
-  notesToggleBtn.setAttribute('aria-expanded', 'false');
+function showScreen(screen) {
+  appScreens.forEach((appScreen) => {
+    const visible = appScreen === screen;
+    appScreen.hidden = !visible;
+    appScreen.classList.toggle('hidden', !visible);
+  });
 }
 
 function showNotesScreen() {
-  setupScreen.hidden = true;
-  notesScreen.hidden = false;
-  vocabularyScreen.hidden = true;
-  acronymsScreen.hidden = true;
-  quizScreen.hidden = true;
-  setupScreen.classList.add('hidden');
-  notesScreen.classList.remove('hidden');
-  vocabularyScreen.classList.add('hidden');
-  acronymsScreen.classList.add('hidden');
-  quizScreen.classList.add('hidden');
-  notesToggleBtn.setAttribute('aria-expanded', 'true');
-  noteInput.focus();
+  showScreen(notesScreen);
+  activeNotesSection = null;
+  notesIndexView.hidden = false;
+  notesIndexView.classList.remove('hidden');
+  notesDetailView.hidden = true;
+  notesDetailView.classList.add('hidden');
+  personalNoteForm.hidden = true;
+  notesSearch.value = '';
+  renderNoteSectionList();
+}
+
+function openNotesDetail(sectionKey, query = '') {
+  activeNotesSection = sectionKey;
+  const group = getNoteGroups().find((item) => item.key === sectionKey);
+  notesDetailTitle.textContent = sectionKey === 'all-sections'
+    ? 'ALL SECTIONS'
+    : group?.label || 'MISCELLANEOUS';
+  notesIndexView.hidden = true;
+  notesIndexView.classList.add('hidden');
+  notesDetailView.hidden = false;
+  notesDetailView.classList.remove('hidden');
+  personalNoteForm.hidden = sectionKey === 'all-sections';
+  sectionNotesSearch.value = query;
+  renderNotes();
+}
+
+function openNoteById(noteId) {
+  const note = notes.find((item) => normalizeNoteEntry(item).id === noteId);
+  if (!note) {
+    showNotesScreen();
+    notesSearch.value = noteId;
+    renderNoteSectionList(noteId);
+    return;
+  }
+
+  const normalized = normalizeNoteEntry(note);
+  showNotesScreen();
+  openNotesDetail(getNoteSectionInfo(normalized.section).key);
+  sectionNotesSearch.value = noteId;
+  renderNotes();
+}
+
+function formulaSearchText(value) {
+  if (value === null || value === undefined) return '';
+  if (Array.isArray(value)) return value.map(formulaSearchText).join(' ');
+  if (typeof value === 'object') {
+    return Object.entries(value).map(([key, nestedValue]) => `${key} ${formulaSearchText(nestedValue)}`).join(' ');
+  }
+  return String(value);
+}
+
+function formatFormulaValue(value) {
+  if (Array.isArray(value)) return value.map(formatFormulaValue).join(', ');
+  if (value && typeof value === 'object') {
+    return Object.entries(value)
+      .map(([key, nestedValue]) => `${key}: ${formatFormulaValue(nestedValue)}`)
+      .join('; ');
+  }
+  return String(value);
+}
+
+function formulaMatches(formula, query) {
+  return matchesSearch(formulaSearchText(formula), query);
+}
+
+function getFormulaCategories() {
+  return [...new Set([
+    ...formulaCategories,
+    ...formulas.map((formula) => formula.category).filter(Boolean),
+  ])];
+}
+
+function renderFormulaCategories(query = '') {
+  formulaCategoryList.replaceChildren();
+  const filteredCategories = getFormulaCategories().filter((category) => (
+    !query
+    || matchesSearch(category, query)
+    || formulas.some((formula) => formula.category === category && formulaMatches(formula, query))
+  ));
+
+  if (!filteredCategories.length) {
+    formulaCategoryList.append(createEmptyState('No formulas match your search.'));
+    return;
+  }
+
+  filteredCategories.forEach((category) => {
+    const count = formulas.filter((formula) => formula.category === category).length;
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'resource-card';
+    const title = document.createElement('span');
+    title.className = 'resource-card-title';
+    title.textContent = category;
+    const description = document.createElement('span');
+    description.className = 'resource-card-description';
+    description.textContent = `${count} ${count === 1 ? 'formula' : 'formulas'}`;
+    button.append(title, description);
+    button.addEventListener('click', () => openFormulaCategory(category, query));
+    formulaCategoryList.appendChild(button);
+  });
+}
+
+function showFormulasScreen() {
+  showScreen(formulasScreen);
+  activeFormulaCategory = null;
+  formulasIndexView.hidden = false;
+  formulasIndexView.classList.remove('hidden');
+  formulasDetailView.hidden = true;
+  formulasDetailView.classList.add('hidden');
+  formulasSearch.value = '';
+  renderFormulaCategories();
+}
+
+function openFormulaCategory(category, query = '') {
+  activeFormulaCategory = category;
+  formulasDetailTitle.textContent = category === 'all-formulas' ? 'ALL FORMULAS' : category;
+  formulasIndexView.hidden = true;
+  formulasIndexView.classList.add('hidden');
+  formulasDetailView.hidden = false;
+  formulasDetailView.classList.remove('hidden');
+  categoryFormulasSearch.value = query;
+  renderFormulaList();
+}
+
+function renderFormula(formula) {
+  const card = document.createElement('article');
+  card.className = 'formula-card';
+  const title = document.createElement('h3');
+  title.textContent = formula.name;
+  card.appendChild(title);
+
+  if (formula.equation) {
+    const equation = document.createElement('p');
+    equation.className = 'formula-equation';
+    equation.textContent = formula.equation;
+    card.appendChild(equation);
+  }
+
+  [
+    ['ID', formula.id],
+    ['Description', formula.description],
+    ['Variables', formula.variables],
+    ['Units', formula.units],
+    ['Conditions or assumptions', formula.conditions],
+    ['When to use', formula.whenToUse],
+    ['Worked example', formula.workedExample],
+    ['Additional notes', formula.notes],
+    ['Search tags', formula.tags],
+    ['Related CEC section', formula.relatedCecSection],
+  ].forEach(([label, value]) => {
+    if (value === undefined || value === null || value === '') return;
+    const field = document.createElement('p');
+    field.className = 'formula-field';
+    const fieldLabel = document.createElement('strong');
+    fieldLabel.textContent = `${label}: `;
+    field.append(fieldLabel, document.createTextNode(formatFormulaValue(value)));
+    card.appendChild(field);
+  });
+
+  if (Array.isArray(formula.relatedNoteIds) && formula.relatedNoteIds.length) {
+    const references = document.createElement('div');
+    references.className = 'note-references';
+    formula.relatedNoteIds.forEach((noteId) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'text-link-btn';
+      button.textContent = `Related note: ${noteId}`;
+      button.addEventListener('click', () => openNoteById(noteId));
+      references.appendChild(button);
+    });
+    card.appendChild(references);
+  }
+
+  return card;
+}
+
+function renderFormulaList() {
+  formulaList.replaceChildren();
+  const query = categoryFormulasSearch.value.trim();
+  const visibleFormulas = formulas
+    .filter((formula) => activeFormulaCategory === 'all-formulas' || formula.category === activeFormulaCategory)
+    .filter((formula) => !query || formulaMatches(formula, query));
+
+  if (!visibleFormulas.length) {
+    formulaList.append(createEmptyState(
+      formulas.length === 0
+        ? 'No formulas have been added yet. Add your formulas to the formulas data list in script.js when you are ready.'
+        : 'No formulas match your search.',
+    ));
+    return;
+  }
+
+  const groupedFormulas = new Map();
+  visibleFormulas.forEach((formula) => {
+    if (!groupedFormulas.has(formula.category)) groupedFormulas.set(formula.category, []);
+    groupedFormulas.get(formula.category).push(formula);
+  });
+
+  getFormulaCategories().forEach((category) => {
+    const categoryFormulas = groupedFormulas.get(category);
+    if (!categoryFormulas) return;
+    if (activeFormulaCategory === 'all-formulas') {
+      const heading = document.createElement('h3');
+      heading.className = 'formula-category-heading';
+      heading.textContent = category;
+      formulaList.appendChild(heading);
+    }
+    categoryFormulas.forEach((formula) => formulaList.appendChild(renderFormula(formula)));
+  });
 }
 
 function showVocabularyScreen() {
-  setupScreen.hidden = true;
-  notesScreen.hidden = true;
-  vocabularyScreen.hidden = false;
-  acronymsScreen.hidden = true;
-  quizScreen.hidden = true;
-  setupScreen.classList.add('hidden');
-  notesScreen.classList.add('hidden');
-  vocabularyScreen.classList.remove('hidden');
-  acronymsScreen.classList.add('hidden');
-  quizScreen.classList.add('hidden');
-  notesToggleBtn.setAttribute('aria-expanded', 'false');
+  showScreen(vocabularyScreen);
   renderVocabulary();
 }
 
 function showAcronymsScreen() {
-  setupScreen.hidden = true;
-  notesScreen.hidden = true;
-  vocabularyScreen.hidden = true;
-  acronymsScreen.hidden = false;
-  quizScreen.hidden = true;
-  setupScreen.classList.add('hidden');
-  notesScreen.classList.add('hidden');
-  vocabularyScreen.classList.add('hidden');
-  acronymsScreen.classList.remove('hidden');
-  quizScreen.classList.add('hidden');
-  notesToggleBtn.setAttribute('aria-expanded', 'false');
+  showScreen(acronymsScreen);
   renderAcronyms();
 }
 
-notesToggleBtn.addEventListener('click', showNotesScreen);
-vocabularyBtn.addEventListener('click', showVocabularyScreen);
-acronymsBtn.addEventListener('click', showAcronymsScreen);
-backToSetupBtn.addEventListener('click', showSetupScreen);
-backToSetupFromVocabularyBtn.addEventListener('click', showSetupScreen);
-backToSetupFromAcronymsBtn.addEventListener('click', showSetupScreen);
+document.querySelectorAll('[data-open-screen]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const target = document.getElementById(button.dataset.openScreen);
+    if (target === setupScreen) showScreen(setupScreen);
+    if (target === notesScreen) showNotesScreen();
+    if (target === formulasScreen) showFormulasScreen();
+    if (target === vocabularyScreen) showVocabularyScreen();
+    if (target === acronymsScreen) showAcronymsScreen();
+  });
+});
+
+document.querySelectorAll('[data-back-home]').forEach((button) => {
+  button.addEventListener('click', () => showScreen(homeScreen));
+});
+
+document.getElementById('back-to-sections-btn').addEventListener('click', showNotesScreen);
+document.getElementById('all-sections-btn').addEventListener('click', () => openNotesDetail('all-sections'));
+document.getElementById('misc-notes-btn').addEventListener('click', () => openNotesDetail('miscellaneous'));
+document.getElementById('all-formulas-btn').addEventListener('click', () => openFormulaCategory('all-formulas'));
+document.getElementById('back-to-categories-btn').addEventListener('click', showFormulasScreen);
+notesSearch.addEventListener('input', () => renderNoteSectionList(notesSearch.value));
+sectionNotesSearch.addEventListener('input', renderNotes);
+formulasSearch.addEventListener('input', () => renderFormulaCategories(formulasSearch.value));
+categoryFormulasSearch.addEventListener('input', renderFormulaList);
 
 saveNoteBtn.addEventListener('click', () => {
   const note = noteInput.value.trim();
   if (!note) return;
 
   addUniqueNote({
-    section: selectedSection || 'Notes',
+    section: activeNotesSection === 'all-sections'
+      ? 'MISCELLANEOUS'
+      : getNoteGroups().find((group) => group.key === activeNotesSection)?.label || 'MISCELLANEOUS',
     text: note,
   });
   saveNotes();
   noteInput.value = '';
+  renderNoteSectionList();
   renderNotes();
 });
 
