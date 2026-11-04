@@ -1,182 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Red Seal Industrial Electrician Study Dashboard</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <main class="quiz-container">
-      <div class="quiz-card">
-        <section id="home-screen" class="home-screen">
-          <div class="home-header">
-            <p class="eyebrow">Red Seal Industrial Electrician</p>
-            <h1>Personal Study Dashboard</h1>
-            <p class="home-intro">Choose a study area to continue.</p>
-          </div>
-          <nav class="dashboard-grid" aria-label="Study areas">
-            <button class="dashboard-card" type="button" data-open-screen="cec-setup-screen">
-              <span class="dashboard-card-title">QUIZ &amp; EXAMS</span>
-              <span class="dashboard-card-description">Practice questions and exam sessions</span>
-            </button>
-            <button class="dashboard-card" type="button" data-open-screen="notes-screen">
-              <span class="dashboard-card-title">NOTES</span>
-              <span class="dashboard-card-description">Browse and search your study notes</span>
-            </button>
-            <button class="dashboard-card" type="button" data-open-screen="formulas-screen">
-              <span class="dashboard-card-title">FORMULAS</span>
-              <span class="dashboard-card-description">Organize formulas by category</span>
-            </button>
-            <button class="dashboard-card" type="button" data-open-screen="vocabulary-screen">
-              <span class="dashboard-card-title">VOCABULARY</span>
-              <span class="dashboard-card-description">Review technical terms</span>
-            </button>
-            <button class="dashboard-card" type="button" data-open-screen="acronyms-screen">
-              <span class="dashboard-card-title">ACRONYMS</span>
-              <span class="dashboard-card-description">Review acronyms and abbreviations</span>
-            </button>
-          </nav>
-        </section>
-
-        <section id="cec-setup-screen" class="hidden" hidden>
-          <div class="notes-header">
-            <div>
-              <p class="eyebrow">Quiz &amp; Exams</p>
-              <h1>Select Options</h1>
-            </div>
-            <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
-          </div>
-
-          <div class="setup-content">
-            <div class="setup-panel setup-left-panel">
-              <div class="question-count-options" aria-label="Number of questions">
-                <div class="setup-row">
-                  <button class="count-btn" type="button" data-question-count="15">15 questions</button>
-                </div>
-
-                <div class="setup-row">
-                  <button class="count-btn" type="button" data-question-count="30">30 questions</button>
-                </div>
-
-                <div class="setup-row">
-                  <button class="count-btn" type="button" data-question-count="50">50 questions</button>
-                </div>
-
-                <div class="setup-row">
-                  <button class="count-btn" type="button" data-question-count="all">All questions</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="setup-panel setup-right-panel">
-              <div id="section-options" class="section-options" aria-label="CEC 2024 sections"></div>
-            </div>
-          </div>
-        </section>
-
-        <section id="notes-screen" class="notes-screen hidden" hidden>
-          <div class="notes-header">
-            <h1>NOTES</h1>
-            <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
-          </div>
-
-          <div id="notes-panel" class="notes-panel">
-            <div id="notes-index-view">
-              <label class="search-label" for="notes-search">Search all notes</label>
-              <input id="notes-search" class="content-search" type="search" placeholder="Search notes..." autocomplete="off">
-              <div id="notes-section-list" class="resource-grid" aria-live="polite"></div>
-              <div class="resource-actions">
-                <button id="all-sections-btn" class="secondary-btn" type="button">ALL SECTIONS</button>
-                <button id="misc-notes-btn" class="secondary-btn" type="button">MISCELLANEOUS</button>
-              </div>
-            </div>
-            <div id="notes-detail-view" class="hidden" hidden>
-              <div class="notes-header detail-header">
-                <h2 id="notes-detail-title"></h2>
-                <div class="resource-actions">
-                  <button id="back-to-sections-btn" class="secondary-btn" type="button">BACK TO SECTIONS</button>
-                  <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
-                </div>
-              </div>
-              <label class="search-label" for="section-notes-search">Search this section</label>
-              <input id="section-notes-search" class="content-search" type="search" placeholder="Search this section..." autocomplete="off">
-              <div id="notes-list" class="notes-list" aria-live="polite"></div>
-            </div>
-            <div class="personal-note-form">
-              <label for="note-input">Add a personal note</label>
-              <textarea id="note-input" rows="3" placeholder="Write a study note..."></textarea>
-              <button id="save-note-btn" class="primary-btn" type="button">Save note</button>
-            </div>
-          </div>
-        </section>
-
-        <section id="formulas-screen" class="content-screen hidden" hidden>
-          <div class="notes-header">
-            <h1>FORMULAS</h1>
-            <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
-          </div>
-          <div id="formulas-index-view">
-            <label class="search-label" for="formulas-search">Search formulas</label>
-            <input id="formulas-search" class="content-search" type="search" placeholder="Search names, equations, descriptions, variables, or tags..." autocomplete="off">
-            <div id="formula-category-list" class="resource-grid" aria-live="polite"></div>
-            <div class="resource-actions">
-              <button id="all-formulas-btn" class="secondary-btn" type="button">ALL FORMULAS</button>
-            </div>
-          </div>
-          <div id="formulas-detail-view" class="hidden" hidden>
-            <div class="notes-header detail-header">
-              <h2 id="formulas-detail-title"></h2>
-              <div class="resource-actions">
-                <button id="back-to-categories-btn" class="secondary-btn" type="button">BACK TO CATEGORIES</button>
-                <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
-              </div>
-            </div>
-            <label class="search-label" for="category-formulas-search">Search formulas</label>
-            <input id="category-formulas-search" class="content-search" type="search" placeholder="Search formulas..." autocomplete="off">
-            <div id="formula-list" class="formula-list" aria-live="polite"></div>
-          </div>
-        </section>
-
-        <section id="vocabulary-screen" class="vocabulary-screen hidden" hidden>
-          <div class="notes-header">
-            <h1>VOCABULARY</h1>
-            <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
-          </div>
-
-          <div class="vocabulary-panel">
-            <div id="vocabulary-list" class="vocabulary-list" aria-live="polite"></div>
-          </div>
-        </section>
-
-        <section id="acronyms-screen" class="vocabulary-screen hidden" hidden>
-          <div class="notes-header">
-            <h1>ACRONYMS</h1>
-            <button class="secondary-btn" type="button" data-back-home>BACK TO HOME</button>
-          </div>
-
-          <div class="vocabulary-panel">
-            <div id="acronyms-list" class="vocabulary-list" aria-live="polite"></div>
-          </div>
-        </section>
-
-        <section id="quiz-screen" class="hidden" hidden>
-          <p id="progress" class="progress">Question 1 of 15</p>
-          <h1 id="question">Loading question...</h1>
-
-          <div id="answers" class="answers" aria-live="polite"></div>
-
-          <div class="quiz-actions">
-            <button id="previous-btn" class="secondary-btn" type="button">Previous</button>
-            <button id="reset-btn" class="secondary-btn" type="button">Reset</button>
-            <div class="navigation-buttons">
-              <button id="next-btn" class="primary-btn" type="button">Next question</button>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
-
-    <script src="script.js?v=5"></script>
-  </body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Red Seal | Industrial Electrician</title><link rel="stylesheet" href="style.css"></head><body>
+<div class="shell"><header class="topbar"><button class="brand" id="home-brand" type="button">⚡ <span>RED SEAL <small>INDUSTRIAL ELECTRICIAN</small></span></button><span class="brand-tag">GuiGamis · Personal Study</span></header>
+<main>
+<section class="screen" id="home-screen"><div class="hero"><span class="eyebrow">YOUR STUDY WORKSPACE</span><h1>Ready for your next challenge?</h1><p>Practice, review the code, and track your progress.</p><div class="hero-stats"><div><strong id="trade-total">541</strong><span>Trade questions</span></div><div><strong id="cec-total">1</strong><span>CEC questions</span></div><div><strong id="home-accuracy">—</strong><span>Last score</span></div></div></div>
+<h2 class="group-heading">PRACTICE</h2><div class="dashboard-grid"><button class="tile" data-mode="trade"><span class="tile-icon">⚡</span><strong>TRADE KNOWLEDGE</strong><small>Your original question bank</small></button><button class="tile" data-mode="cec"><span class="tile-icon">📘</span><strong>CEC</strong><small>New code and calculation questions</small></button><button class="tile accent" data-mode="combined"><span class="tile-icon">🔀</span><strong>COMBINED EXAM</strong><small>Mix both independent banks</small></button></div>
+<h2 class="group-heading">STUDY RESOURCES</h2><div class="dashboard-grid"><button class="tile" data-screen="notes-screen">🗒️ <strong>NOTES</strong><small>Sections and personal notes</small></button><button class="tile" data-screen="formulas-screen">∑ <strong>FORMULAS</strong><small>Formula library</small></button><button class="tile" data-screen="reference-screen">📖 <strong>CEC REFERENCE</strong><small>Private bookmarks and references</small></button><button class="tile" data-screen="vocabulary-screen">Aa <strong>VOCABULARY</strong><small>Technical terms</small></button><button class="tile" data-screen="acronyms-screen">ABC <strong>ACRONYMS</strong><small>Abbreviations</small></button></div>
+<h2 class="group-heading">EXAM INFORMATION</h2><div class="dashboard-grid"><button class="tile" data-screen="blueprint-screen">📊 <strong>EXAM BLUEPRINT</strong><small>Activities A–F and 31 tasks</small></button><button class="tile" data-screen="documents-screen">📂 <strong>MY DOCUMENTS</strong><small>Private document checklist</small></button><button class="tile" data-screen="progress-screen">📈 <strong>MY PROGRESS</strong><small>Results and exam history</small></button></div></section>
+<section class="screen" id="setup-screen" hidden><div class="screen-head"><div><span class="eyebrow">PRACTICE SETUP</span><h1 id="setup-title">Choose your exam</h1><p id="setup-description"></p></div><button class="ghost" data-home>← Home</button></div><div class="panel"><label class="field-label" for="question-count">Number of questions</label><select id="question-count"><option value="15">15 questions</option><option value="30">30 questions</option><option value="50">50 questions</option><option value="100">100 questions</option><option value="all">All available</option><option value="custom">Custom</option></select><input id="custom-count" type="number" min="1" max="1000" value="20" hidden><label class="field-label" for="duration">Timer (minutes)</label><select id="duration"><option value="0">No timer — practice mode</option><option value="30">30 minutes</option><option value="45">45 minutes</option><option value="60">60 minutes</option><option value="90">90 minutes</option><option value="120">120 minutes</option><option value="custom">Custom</option></select><input id="custom-duration" type="number" min="1" max="600" value="60" hidden><label class="check"><input type="checkbox" id="blueprint-toggle" checked> Use blueprint distribution when activity tags are available</label><p class="hint" id="availability-info"></p><button class="primary" id="start-btn">Start exam →</button></div></section>
+<section class="screen" id="quiz-screen" hidden><div class="exam-top"><div><span class="eyebrow" id="exam-mode-label"></span><p id="question-progress"></p></div><div class="timer" id="timer-display">Untimed</div></div><div class="progress-track"><div id="progress-fill"></div></div><article class="panel question-panel"><div class="question-meta" id="question-meta"></div><h1 id="question-text"></h1><div id="answers" class="answers"></div><div class="feedback" id="answer-feedback" hidden></div></article><div class="exam-actions"><button class="ghost" id="previous-btn">← Previous</button><button class="ghost" id="mark-btn">☆ Mark for review</button><button class="ghost" id="calculator-btn">Calculator</button><button class="ghost danger" id="quit-btn">Exit</button><button class="primary" id="next-btn">Next →</button></div></section>
+<section class="screen" id="result-screen" hidden><div class="screen-head"><div><span class="eyebrow">EXAM COMPLETED</span><h1>Your results</h1></div><button class="ghost" data-home>← Home</button></div><div class="panel result-panel"><div class="score-circle" id="score-circle">0%</div><h2 id="result-title"></h2><p id="result-detail"></p><div id="result-breakdown"></div><button class="primary" id="retry-btn">Try another exam</button></div></section>
+<section class="screen" id="notes-screen" hidden><div class="screen-head"><div><span class="eyebrow">STUDY RESOURCES</span><h1>Notes</h1></div><button class="ghost" data-home>← Home</button></div><div class="panel"><div id="notes-index"><input type="search" id="notes-search" placeholder="Search all notes"><div id="notes-sections" class="resource-grid"></div><div class="actions"><button class="ghost" id="all-notes-btn">All sections</button><button class="ghost" id="misc-notes-btn">Miscellaneous</button></div></div><div id="notes-detail" hidden><div class="actions"><button class="ghost" id="back-notes-btn">← Back to sections</button><h2 id="notes-detail-title"></h2></div><input type="search" id="section-notes-search" placeholder="Search this section"><div id="notes-list"></div></div><div class="note-editor"><label for="note-section">Save a personal note in</label><select id="note-section"></select><textarea id="note-input" rows="3" placeholder="Write your own study note..."></textarea><button class="primary" id="save-note-btn">Save note</button></div></div></section>
+<section class="screen" id="formulas-screen" hidden><div class="screen-head"><div><span class="eyebrow">STUDY RESOURCES</span><h1>Formulas</h1></div><button class="ghost" data-home>← Home</button></div><div class="panel"><p class="hint">Starter formulas are general electrical formulas. Compare notation and exam conditions with your authorized formula sheet.</p><input id="formula-search" type="search" placeholder="Search formulas"><div id="formula-list"></div></div></section>
+<section class="screen" id="reference-screen" hidden><div class="screen-head"><div><span class="eyebrow">CEC 2024</span><h1>CEC Reference</h1></div><button class="ghost" data-home>← Home</button></div><div class="panel"><p class="hint">Your licensed CEC PDF is not included in this public-site project. Store only personal bookmarks and original notes here.</p><input id="reference-search" type="search" placeholder="Search sections or bookmarks"><div id="reference-list" class="resource-grid"></div><div class="note-editor"><label for="reference-title">New bookmark / rule</label><input id="reference-title" placeholder="e.g. Rule 28-200"><textarea id="reference-note" placeholder="Your own notes (do not paste copyrighted CEC passages)"></textarea><button class="primary" id="save-reference-btn">Save reference</button></div></div></section>
+<section class="screen" id="vocabulary-screen" hidden><div class="screen-head"><div><span class="eyebrow">STUDY RESOURCES</span><h1>Vocabulary</h1></div><button class="ghost" data-home>← Home</button></div><input id="vocabulary-search" type="search" placeholder="Search vocabulary"><div id="vocabulary-list" class="list-panel"></div></section>
+<section class="screen" id="acronyms-screen" hidden><div class="screen-head"><div><span class="eyebrow">STUDY RESOURCES</span><h1>Acronyms</h1></div><button class="ghost" data-home>← Home</button></div><input id="acronyms-search" type="search" placeholder="Search acronyms"><div id="acronyms-list" class="list-panel"></div></section>
+<section class="screen" id="blueprint-screen" hidden><div class="screen-head"><div><span class="eyebrow">EXAM INFORMATION</span><h1>Exam Blueprint</h1><p>Industrial Electrician — October 2023 document, based on 2021 RSOS. 100 questions.</p></div><button class="ghost" data-home>← Home</button></div><div id="blueprint-list"></div></section>
+<section class="screen" id="documents-screen" hidden><div class="screen-head"><div><span class="eyebrow">EXAM INFORMATION</span><h1>My Documents</h1></div><button class="ghost" data-home>← Home</button></div><div class="panel"><p>This is a checklist, not a document upload service. Keep personal forms and the licensed CEC PDF in a private, authorized location.</p><div class="doc-row">📄 Industrial Electrician Exam Blueprint — October 2023 <span>Study reference</span></div><div class="doc-row">📄 Industrial Electrician Formula Sheet — 2023 <span>Study reference</span></div><div class="doc-row">🔒 CEC 2024, CSA C22.1:24 <span>Licensed — keep private</span></div><div class="doc-row">🔒 Employer Declaration <span>Personal — keep private</span></div></div></section>
+<section class="screen" id="progress-screen" hidden><div class="screen-head"><div><span class="eyebrow">EXAM INFORMATION</span><h1>My Progress</h1></div><button class="ghost" data-home>← Home</button></div><div class="stats-grid" id="progress-stats"></div><h2>Exam history</h2><div class="panel" id="history-list"></div></section>
+</main><footer>GuiGamis · Red Seal Industrial Electrician · Local study tool</footer></div>
+<dialog id="calculator-dialog"><div class="calc-head"><strong>Scientific Calculator</strong><button class="ghost" id="calc-close">✕</button></div><input id="calc-display" aria-label="Calculator expression" placeholder="e.g. sqrt(9)+2^3"><div id="calc-keys" class="calc-keys"></div><div id="calc-result" aria-live="polite"></div></dialog>
+<script src="trade-knowledge.js"></script><script src="cec-questions.js"></script><script src="study-data.js"></script><script src="blueprint-data.js"></script><script src="script.js"></script></body></html>
