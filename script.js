@@ -3,7 +3,7 @@
 const $ = (id) => document.getElementById(id);
 const $$ = (sel) => [...document.querySelectorAll(sel)];
 const safeLoad = (key, fallback) => { try { const v=JSON.parse(localStorage.getItem(key)); return v ?? fallback; } catch {return fallback;} };
-const safeSave = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); } catch(e) { alert('Could not save locally: '+e.message); } };
+const safeSave = (key, val) => { try { localStorage.setItem(key, JSON.stringify(val)); return true; } catch(e) { alert('Could not save locally: '+e.message); return false; } };
 const bankTrade = tradeKnowledgeQuestions.map((q,i)=>({...q,id:q.id||`trade-${i+1}`,source:'TRADE KNOWLEDGE',classification:'TRADE KNOWLEDGE'}));
 const bankCEC = cecQuestions.map((q,i)=>({...q,id:q.id||`cec-${i+1}`,source:'CEC',classification:q.classification||'CEC'}));
 const allQuestions=[...bankTrade,...bankCEC];
@@ -11,14 +11,57 @@ const duplicates=allQuestions.map(q=>q.id).filter((id,i,a)=>a.indexOf(id)!==i);
 if(duplicates.length) console.warn('Duplicate question IDs:',duplicates);
 const validQuestion=q=>q&&typeof q.question==='string'&&Array.isArray(q.options)&&q.options.length>=2&&Number.isInteger(q.answer)&&q.answer>=0&&q.answer<q.options.length;
 const invalid=allQuestions.filter(q=>!validQuestion(q));if(invalid.length) console.warn('Questions needing review:',invalid);
-let notes=safeLoad('redSealNotes',null);
-if(!Array.isArray(notes)) notes=defaultNotes.map(n=>typeof n==='string'?{section:'Miscellaneous',text:n}:{section:n.section||'Miscellaneous',text:n.text||''});
-notes=notes.map(n=>typeof n==='string'?{section:'Miscellaneous',text:n}:{section:n.section||'Miscellaneous',text:n.text||''}).filter(n=>n.text);
+const noteMigrationBackupKey='redSealNotes_backup_before_section_migration';
+const noteMigrationVersionKey='redSealNotesSectionMigration';
+const noteSectionsStorageKey='redSealNoteSections';
+const defaultNoteSections=[2,4,6,8,10,12,14,16,18,20,26,28,30,32,36,60,62,64,68,76,80,86].map(n=>`Section ${String(n).padStart(2,'0')}`);
+const sectionLabel=value=>{
+ const text=String(value||'').trim();
+ if(/^misc(?:ellaneous)?$/i.test(text))return 'Miscellaneous';
+ const match=text.match(/^(?:cec\s+)?section\s*(\d{1,2})(?:\s*[-–—:]\s*.*)?$/i)||text.match(/^(\d{1,2})$/);
+ return match?`Section ${String(Number(match[1])).padStart(2,'0')}`:text;
+};
+const sectionNumber=value=>{const match=String(value||'').match(/^Section\s*(\d{1,2})\b/i);return match?Number(match[1]):null;};
+const mentionedSections=text=>{
+ const found=[];
+ const content=String(text||'');
+ for(const match of content.matchAll(/\b(?:sections?|seções?|secs?\.?)\s*(\d{1,2})\b/gi))found.push(Number(match[1]));
+ for(const match of content.matchAll(/\b(?:sections?|seções?)\s*(\d{1,2})((?:\s*(?:\/|,|&|and)\s*\d{1,2})+)/gi)){
+  found.push(Number(match[1]));for(const number of match[2].matchAll(/\d{1,2}/g))found.push(Number(number[0]));
+ }
+ for(const match of content.matchAll(/\bRule\s*(\d{1,2})-\d+\b/gi))found.push(Number(match[1]));
+ return [...new Set(found)].map(n=>`Section ${String(n).padStart(2,'0')}`);
+};
+let customNoteSections=safeLoad(noteSectionsStorageKey,[]);
+if(!Array.isArray(customNoteSections))customNoteSections=[];
+customNoteSections=[...new Set(customNoteSections.filter(s=>typeof s==='string').map(sectionLabel).filter(s=>s&&s!=='Miscellaneous'))];
+const storedNotes=safeLoad('redSealNotes',null);
+const sourceNotes=Array.isArray(storedNotes)?storedNotes:defaultNotes.map(n=>typeof n==='string'?{section:'Miscellaneous',text:n}:{section:n.section||'Miscellaneous',text:n.text||''});
+let notes=sourceNotes.map(n=>typeof n==='string'?{section:'Miscellaneous',text:n}:{...n,section:n.section||'Miscellaneous',text:typeof n.text==='string'?n.text:''});
+if(safeLoad(noteMigrationVersionKey,0)<1){
+ const currentCustomSections=[...customNoteSections];
+ const migratedNotes=notes.map(n=>{
+  const currentSection=sectionLabel(n.section);
+  if(sectionNumber(currentSection)!==null||currentCustomSections.some(s=>s.toLowerCase()===currentSection.toLowerCase()))return {...n,section:currentSection};
+  return {...n,section:mentionedSections(n.text)[0]||'Miscellaneous'};
+ });
+ try{
+  if(localStorage.getItem(noteMigrationBackupKey)===null){
+   const original=localStorage.getItem('redSealNotes');
+   localStorage.setItem(noteMigrationBackupKey,original===null?JSON.stringify(sourceNotes):original);
+  }
+  localStorage.setItem('redSealNotes',JSON.stringify(migratedNotes));
+  localStorage.setItem(noteSectionsStorageKey,JSON.stringify(currentCustomSections));
+  localStorage.setItem(noteMigrationVersionKey,'1');
+  notes=migratedNotes;
+ }catch(error){
+  alert('Could not back up and reorganize your notes. Your original notes have not been intentionally changed. '+error.message);
+ }
+}
 const notesKey=n=>`${n.section}::${n.text}`.toLowerCase().replace(/\s+/g,' ').trim();
-notes=[...new Map(notes.map(n=>[notesKey(n),n])).values()];
 let references=safeLoad('redSealReferences',[]);
 let history=safeLoad('redSealExamHistory',[]);
-let mode='trade', session=null, tickHandle=null, notesSection='all';
+let mode='trade', session=null, tickHandle=null, notesSection='index', editingNote=null, employerDeclarationUrl=null;
 const activities=Object.fromEntries(blueprintActivities.map(a=>[a.id,a]));
 function show(id){ $$('.screen').forEach(el=>el.hidden=el.id!==id);window.scrollTo(0,0); if(id==='home-screen') refreshHome();if(id==='notes-screen')renderNotes();if(id==='formulas-screen')renderFormulas();if(id==='reference-screen')renderReferences();if(id==='vocabulary-screen')renderTerms('vocabulary');if(id==='acronyms-screen')renderTerms('acronyms');if(id==='blueprint-screen')renderBlueprint();if(id==='progress-screen')renderProgress(); }
 function refreshHome(){ $('trade-total').textContent=bankTrade.length;$('cec-total').textContent=bankCEC.length;$('home-accuracy').textContent=history.length?history[0].accuracy+'%':'—'; }
@@ -53,13 +96,51 @@ function finishExam(expired=false){if(!session)return;clearInterval(tickHandle);
  const bySource={};for(let i=0;i<s.questions.length;i++){const q=s.questions[i],key=q.source;bySource[key]??={correct:0,total:0};bySource[key].total++;if(s.selections[i]!==null&&s.selections[i]===q.answer)bySource[key].correct++;}
  const record={date:new Date().toISOString(),mode:s.mode,total:s.questions.length,answered,correct,accuracy,expired,bySource,marked:s.marked,questionResults:s.questions.map((q,i)=>({id:q.id,source:q.source,classification:q.classification,majorWorkActivity:q.majorWorkActivity||null,correct:s.selections[i]===q.answer,answered:s.selections[i]!==null}))};history.unshift(record);history=history.slice(0,200);safeSave('redSealExamHistory',history);
  $('score-circle').textContent=accuracy+'%';$('result-title').textContent=`${correct} of ${s.questions.length} correct`;$('result-detail').textContent=`${answered} answered · ${s.questions.length-answered} unanswered${expired?' · Time expired':''}`;$('result-breakdown').replaceChildren();Object.entries(bySource).forEach(([k,v])=>{const p=document.createElement('p');p.textContent=`${k}: ${v.correct}/${v.total} correct`;$('result-breakdown').append(p);});show('result-screen');}
-function noteSectionName(n){const m=String(n.section||'').match(/(?:section|seção)\s*(\d+)/i);return m?`Section ${m[1].padStart(2,'0')}`:String(n.section||'Miscellaneous');}
-const sectionList=Array.from({length:0},(_,i)=>i);
 const cecSections=['00','02','04','06','08','10','12','14','16','18','20','22','24','26','28','30','32','34','36','38','40','42','44','46','48','50','52','54','56','58','60','62','64','66','68','70','72','74','76','78','80','82','84','86'];
-function noteGroups(){const map=new Map();notes.forEach(n=>{const k=noteSectionName(n);if(!map.has(k))map.set(k,[]);map.get(k).push(n);});return map;}
-function renderNotes(){const sel=$('note-section');const current=sel.value;sel.replaceChildren();[...cecSections.map(s=>'Section '+s),'Miscellaneous'].forEach(s=>sel.add(new Option(s,s)));if(current)sel.value=current;
- $('notes-index').hidden=notesSection!=='index';$('notes-detail').hidden=notesSection==='index';const query=$('notes-search').value.toLowerCase();const groups=noteGroups();const container=$('notes-sections');container.replaceChildren();[...cecSections.map(s=>'Section '+s),'Miscellaneous'].forEach(name=>{const entries=groups.get(name)||[];if(query&&!name.toLowerCase().includes(query)&&!entries.some(n=>n.text.toLowerCase().includes(query)))return;const b=document.createElement('button');b.className='resource-card';b.innerHTML=`<strong>${name}</strong><small>${entries.length} notes</small>`;b.onclick=()=>{notesSection=name;renderNotes();};container.append(b);});
- if(notesSection==='index')return;$('notes-detail-title').textContent=notesSection==='all'?'All sections':notesSection;const list=$('notes-list');list.replaceChildren();const search=$('section-notes-search').value.toLowerCase();const names=notesSection==='all'?[...groups.keys()].filter(k=>k!=='Miscellaneous').sort((a,b)=>Number(a.match(/\d+/)?.[0]||999)-Number(b.match(/\d+/)?.[0]||999)): [notesSection];let shown=0;names.forEach(name=>(groups.get(name)||[]).filter(n=>n.text.toLowerCase().includes(search)).forEach(n=>{shown++;const card=document.createElement('div');card.className='note-entry';const heading=document.createElement('strong');heading.textContent=name;const text=document.createElement('p');text.textContent=n.text;const del=document.createElement('button');del.className='text-button';del.textContent='Delete';del.onclick=()=>{if(confirm('Delete this personal note?')){notes=notes.filter(x=>x!==n);safeSave('redSealNotes',notes);renderNotes();}};card.append(heading,text,del);list.append(card);}));if(!shown)list.textContent='No matching notes.';}
+function noteSectionNames(){
+ const labels=[...new Set([...notes.map(n=>sectionLabel(n.section)),...customNoteSections])];
+ const base=new Set(defaultNoteSections);
+ const additionalNumbers=labels.filter(name=>sectionNumber(name)!==null&&!base.has(name)).sort((a,b)=>sectionNumber(a)-sectionNumber(b));
+ const custom=labels.filter(name=>sectionNumber(name)===null&&name!=='Miscellaneous').sort((a,b)=>a.localeCompare(b));
+ return [...defaultNoteSections,...additionalNumbers,...custom,'Miscellaneous'];
+}
+function noteGroups(){const map=new Map();notes.forEach(n=>{const k=sectionLabel(n.section);if(!map.has(k))map.set(k,[]);map.get(k).push(n);});return map;}
+function resetNoteEditor(){editingNote=null;$('note-input').value='';$('save-note-btn').textContent='Save note';$('cancel-note-edit-btn').hidden=true;}
+function renderNotes(){
+ const sectionNames=noteSectionNames(),sel=$('note-section'),current=sel.value;
+ sel.replaceChildren(...sectionNames.map(name=>new Option(name,name)));
+ if(notesSection!=='index'&&notesSection!=='all'&&sectionNames.includes(notesSection))sel.value=notesSection;
+ else if(sectionNames.includes(current))sel.value=current;
+ $('notes-index').hidden=notesSection!=='index';$('notes-detail').hidden=notesSection==='index';
+ const query=$('notes-search').value.toLowerCase(),groups=noteGroups(),container=$('notes-sections');
+ container.replaceChildren();
+ sectionNames.forEach(name=>{
+  const entries=groups.get(name)||[];
+  if(query&&!name.toLowerCase().includes(query)&&!entries.some(n=>n.text.toLowerCase().includes(query)))return;
+  const button=document.createElement('button');button.className='resource-card';button.type='button';
+  const heading=document.createElement('strong');heading.textContent=name;
+  const count=document.createElement('small');count.textContent=`${entries.length} notes`;
+  button.append(heading,count);button.onclick=()=>{notesSection=name;renderNotes();};container.append(button);
+ });
+ if(notesSection==='index')return;
+ $('notes-detail-title').textContent=notesSection==='all'?'All sections':notesSection;
+ const list=$('notes-list');list.replaceChildren();const search=$('section-notes-search').value.toLowerCase();
+ const names=notesSection==='all'?sectionNames.filter(name=>name!=='Miscellaneous'):[notesSection];let shown=0;
+ names.forEach(name=>(groups.get(name)||[]).filter(n=>n.text.toLowerCase().includes(search)).forEach(n=>{
+  shown++;const card=document.createElement('div');card.className='note-entry';
+  const heading=document.createElement('strong');heading.textContent=name;
+  const related=mentionedSections(n.text).filter(section=>section!==name);
+  if(related.length){const relatedLabel=document.createElement('small');relatedLabel.className='related-sections';relatedLabel.textContent=`Also mentions ${related.join(', ')}`;card.append(heading,relatedLabel);}else card.append(heading);
+  const text=document.createElement('p');text.textContent=n.text;
+  const actions=document.createElement('div');actions.className='actions';
+  const edit=document.createElement('button');edit.className='text-button';edit.type='button';edit.textContent='Edit';
+  edit.onclick=()=>{editingNote=n;$('note-section').value=sectionLabel(n.section);$('note-input').value=n.text;$('save-note-btn').textContent='Update note';$('cancel-note-edit-btn').hidden=false;$('note-input').focus();};
+  const del=document.createElement('button');del.className='text-button danger';del.type='button';del.textContent='Delete';
+  del.onclick=()=>{if(confirm('Delete this personal note?')){notes=notes.filter(x=>x!==n);safeSave('redSealNotes',notes);if(editingNote===n)resetNoteEditor();renderNotes();}};
+  actions.append(edit,del);card.append(text,actions);list.append(card);
+ }));
+ if(!shown)list.textContent='No matching notes.';
+}
 const formulas=[{category:'Ohm’s Law',name:'Voltage',equation:'V = I × R',variables:'V: volts · I: amperes · R: ohms'},{category:'Ohm’s Law',name:'Current',equation:'I = V / R',variables:'I: amperes · V: volts · R: ohms'},{category:'Ohm’s Law',name:'Resistance',equation:'R = V / I',variables:'R: ohms · V: volts · I: amperes'},{category:'Power',name:'DC / resistive power',equation:'P = V × I',variables:'P: watts · V: volts · I: amperes'},{category:'Power',name:'Single-phase AC real power',equation:'P = V × I × PF',variables:'PF: power factor'},{category:'Power',name:'Three-phase balanced real power',equation:'P = √3 × Vₗ × Iₗ × PF',variables:'Vₗ: line voltage · Iₗ: line current'},{category:'Motors',name:'Synchronous speed',equation:'nₛ = 120 × f / poles',variables:'nₛ: rpm · f: hertz'},{category:'Transformers',name:'Ideal turns ratio',equation:'Vₚ / Vₛ = Nₚ / Nₛ',variables:'V: voltage · N: number of turns'},{category:'AC',name:'Frequency and period',equation:'f = 1 / T',variables:'f: hertz · T: seconds'}];
 function renderFormulas(){const query=$('formula-search').value.toLowerCase();$('formula-list').replaceChildren();formulas.filter(f=>Object.values(f).join(' ').toLowerCase().includes(query)).forEach(f=>{const c=document.createElement('article');c.className='formula-card';const h=document.createElement('h3');h.textContent=`${f.category} · ${f.name}`;const eq=document.createElement('div');eq.className='equation';eq.textContent=f.equation;const p=document.createElement('p');p.textContent=f.variables;c.append(h,eq,p);$('formula-list').append(c);});}
 function renderReferences(){const q=$('reference-search').value.toLowerCase();const list=$('reference-list');list.replaceChildren();[...cecSections.map(s=>({title:'Section '+s,note:'CEC 2024 section index'})),...references].filter(x=>`${x.title} ${x.note}`.toLowerCase().includes(q)).forEach(r=>{const c=document.createElement('article');c.className='resource-card';const t=document.createElement('strong');t.textContent=r.title;const p=document.createElement('small');p.textContent=r.note;c.append(t,p);if(references.includes(r)){const b=document.createElement('button');b.className='text-button';b.textContent='Delete bookmark';b.onclick=()=>{references=references.filter(x=>x!==r);safeSave('redSealReferences',references);renderReferences();};c.append(b);}list.append(c);});}
@@ -74,7 +155,33 @@ calcKeys.forEach(key=>{const b=document.createElement('button');b.type='button';
 $$('[data-home]').forEach(b=>b.onclick=()=>{if(session&&!confirm('Exit exam without saving results?'))return;session=null;clearInterval(tickHandle);show('home-screen');});$('home-brand').onclick=()=>{if(session&&!confirm('Exit exam without saving results?'))return;session=null;clearInterval(tickHandle);show('home-screen');};
 $$('[data-screen]').forEach(b=>b.onclick=()=>show(b.dataset.screen));$$('[data-mode]').forEach(b=>b.onclick=()=>openSetup(b.dataset.mode));$('question-count').onchange=()=>$('custom-count').hidden=$('question-count').value!=='custom';$('duration').onchange=()=>$('custom-duration').hidden=$('duration').value!=='custom';$('start-btn').onclick=startExam;
 $('next-btn').onclick=()=>{if(!session)return;if(session.index===session.questions.length-1){finishExam();return;}session.index++;renderQuestion();};$('previous-btn').onclick=()=>{if(session&&session.index>0){session.index--;renderQuestion();}};$('mark-btn').onclick=()=>{if(!session)return;const id=session.questions[session.index].id;session.marked=session.marked.includes(id)?session.marked.filter(x=>x!==id):[...session.marked,id];renderQuestion();};$('quit-btn').onclick=()=>{if(confirm('Exit exam? Unsaved answers will be lost.')){session=null;clearInterval(tickHandle);show('home-screen');}};$('retry-btn').onclick=()=>openSetup(mode);
-$('notes-search').oninput=renderNotes;$('section-notes-search').oninput=renderNotes;$('all-notes-btn').onclick=()=>{notesSection='all';renderNotes();};$('misc-notes-btn').onclick=()=>{notesSection='Miscellaneous';renderNotes();};$('back-notes-btn').onclick=()=>{notesSection='index';$('section-notes-search').value='';renderNotes();};$('save-note-btn').onclick=()=>{const text=$('note-input').value.trim();if(!text)return;const n={section:$('note-section').value||'Miscellaneous',text};if(!notes.some(x=>notesKey(x)===notesKey(n)))notes.push(n);safeSave('redSealNotes',notes);$('note-input').value='';renderNotes();};
+$('notes-search').oninput=renderNotes;$('section-notes-search').oninput=renderNotes;$('all-notes-btn').onclick=()=>{notesSection='all';renderNotes();};$('misc-notes-btn').onclick=()=>{notesSection='Miscellaneous';renderNotes();};$('back-notes-btn').onclick=()=>{notesSection='index';$('section-notes-search').value='';renderNotes();};
+$('save-note-btn').onclick=()=>{
+ const text=$('note-input').value;if(!text.trim())return;
+ const section=$('note-section').value||'Miscellaneous';
+ if(editingNote){const index=notes.indexOf(editingNote);if(index<0){resetNoteEditor();return;}notes[index]={...editingNote,section,text};}
+ else{const note={section,text};if(!notes.some(existing=>notesKey(existing)===notesKey(note)))notes.push(note);}
+ if(safeSave('redSealNotes',notes))resetNoteEditor();renderNotes();
+};
+$('cancel-note-edit-btn').onclick=resetNoteEditor;
+$('add-section-btn').onclick=()=>{$('new-section-name').value='';$('add-section-dialog').showModal();$('new-section-name').focus();};
+$('cancel-section-btn').onclick=()=>$('add-section-dialog').close();
+$('add-section-save-btn').onclick=()=>{
+ const raw=$('new-section-name').value.trim();if(!raw){alert('Enter a section number or name.');return;}
+ const name=sectionLabel(raw);if(!name||name==='Miscellaneous'){alert('Choose a section number or another section name.');return;}
+ if(noteSectionNames().some(section=>section.toLowerCase()===name.toLowerCase())){alert('That section already exists.');return;}
+ customNoteSections.push(name);
+ if(!safeSave(noteSectionsStorageKey,customNoteSections)){customNoteSections.pop();return;}
+ $('add-section-dialog').close();notesSection=name;renderNotes();
+};
+$('select-employer-declaration').onclick=()=>$('employer-declaration-file').click();
+$('employer-declaration-file').onchange=()=>{
+ const file=$('employer-declaration-file').files[0];if(!file)return;
+ if(file.type!=='application/pdf'&&!file.name.toLowerCase().endsWith('.pdf')){alert('Select a PDF file.');$('employer-declaration-file').value='';return;}
+ if(employerDeclarationUrl)URL.revokeObjectURL(employerDeclarationUrl);
+ employerDeclarationUrl=URL.createObjectURL(file);
+ const link=$('employer-declaration-view');link.href=employerDeclarationUrl;link.textContent=`View ${file.name} (local only)`;link.hidden=false;
+};
 $('formula-search').oninput=renderFormulas;$('reference-search').oninput=renderReferences;$('save-reference-btn').onclick=()=>{const title=$('reference-title').value.trim(),note=$('reference-note').value.trim();if(!title)return;references.push({title,note});safeSave('redSealReferences',references);$('reference-title').value='';$('reference-note').value='';renderReferences();};$('vocabulary-search').oninput=()=>renderTerms('vocabulary');$('acronyms-search').oninput=()=>renderTerms('acronyms');
 $('calculator-btn').onclick=()=>$('calculator-dialog').showModal();$('calc-close').onclick=()=>$('calculator-dialog').close();$('calc-display').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();try{$('calc-result').textContent='= '+calculate(e.target.value);}catch(err){$('calc-result').textContent=err.message;}}};
 notesSection='index';refreshHome();show('home-screen');
